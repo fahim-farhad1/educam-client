@@ -55,7 +55,7 @@ const Signup = () => {
               {errors.password?.type === 'pattern' && <p className="text-sm text-red-500 mt-2" role="alert">Password must be at least one number and  one special character</p>}
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+            <input className="btn btn-primary" type="submit" value='Sign up' />
             </div>
             <p className="text-sm">Already have an Account? <Link to='/login'><button className="btn btn-link">please Login</button></Link></p>
           </form>
