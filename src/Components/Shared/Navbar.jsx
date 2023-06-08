@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import Logo from "../../assets/Logo/logo.png";
 import Container from "./Container";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handelLogOut = () =>{
+    logOut()
+    .then(() =>{
+
+    })
+    .catch(error =>{
+      const message = error.message;
+      console.log(message);
+    })
+  }
   const navItem = (
     <>
       <li>
@@ -70,7 +82,17 @@ const Navbar = () => {
           <div>
             <div className="flex items-center">
               <div className="mr-5">
-                <Link to="/login"><button className="btn ">Login</button> </Link>
+                {user ? (
+                  <>
+                    <button onClick={handelLogOut} className="btn ">Logout</button>{" "}
+                  </>
+                ) : (
+                  <>
+                    <Link to="/login">
+                      <button className="btn ">Login</button>{" "}
+                    </Link>
+                  </>
+                )}
               </div>
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -83,7 +105,7 @@ const Navbar = () => {
                   className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                 >
                   <li>
-                    <Link to='#'>Profile</Link>
+                    <Link to="#">Profile</Link>
                   </li>
                   <li>
                     <Link to="/signup">Sign up</Link>
