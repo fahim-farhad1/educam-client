@@ -1,6 +1,6 @@
 import React from "react";
-import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
   const {
@@ -9,7 +9,6 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => console.log(data);
-
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content">
@@ -71,9 +70,14 @@ const Login = () => {
               )}
             </div>
             <div className="form-control mt-6">
-            <input className="btn btn-primary" type="submit" value='Login' />
+              <input className="btn btn-primary" type="submit" value="Login" />
             </div>
-            <p className="text-sm">Don't have an Account? <Link to='/signup'><button className="btn btn-link">please Sign up</button></Link></p>
+            <p className="text-sm">
+              Don't have an Account?
+              <Link to="/signup">
+                <button className="btn btn-link">please Sign up</button>
+              </Link>
+            </p>
           </form>
         </div>
       </div>
