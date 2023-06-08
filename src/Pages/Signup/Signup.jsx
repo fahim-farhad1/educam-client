@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -41,14 +42,22 @@ const Signup = () => {
               <input
                 type="password"
                 placeholder="password"
-                {...register("password", { required:  "Password is required" })} aria-invalid={errors.password ? "true" : "false"}
+                {...register("password", { required: true,
+                     minLength:6,
+                     maxLength: 20,
+                    pattern: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/,
+                })} aria-invalid={errors.password ? "true" : "false"}
                 className="input input-bordered"
               />
-              {errors.password && <p className="text-sm text-red-500 mt-2" role="alert">{errors.password?.message}</p>}
+              {errors.password?.type === 'required' && <p className="text-sm text-red-500 mt-2" role="alert">password is required</p>}
+              {errors.password?.type === 'minLength' && <p className="text-sm text-red-500 mt-2" role="alert">Password must be six characters</p>}
+              {errors.password?.type === 'maxLength' && <p className="text-sm text-red-500 mt-2" role="alert"></p>}
+              {errors.password?.type === 'pattern' && <p className="text-sm text-red-500 mt-2" role="alert">Password must be at least one number and  one special character</p>}
             </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
             </div>
+            <p className="text-sm">Already have an Account? <Link to='/login'><button className="btn btn-link">please Login</button></Link></p>
           </form>
         </div>
       </div>

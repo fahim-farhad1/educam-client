@@ -2,8 +2,12 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
 
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -15,22 +19,55 @@ const Login = () => {
                 <span className="label-text">Email</span>
               </label>
               <input
-                type="text"
+                type="email"
                 placeholder="email"
-                {...register("email")}
+                {...register("email", {
+                  required: "Email Address is required",
+                })}
+                aria-invalid={errors.email ? "true" : "false"}
                 className="input input-bordered"
               />
+              {errors.email && (
+                <p className="text-sm text-red-500 mt-2" role="alert">
+                  {errors.email?.message}
+                </p>
+              )}
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="text"
+                type="password"
                 placeholder="password"
-                {...register("password")}
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                  maxLength: 20,
+                  pattern:
+                    /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/,
+                })}
+                aria-invalid={errors.password ? "true" : "false"}
                 className="input input-bordered"
               />
+              {errors.password?.type === "required" && (
+                <p className="text-sm text-red-500 mt-2" role="alert">
+                  password is required
+                </p>
+              )}
+              {errors.password?.type === "minLength" && (
+                <p className="text-sm text-red-500 mt-2" role="alert">
+                  Password must be six characters
+                </p>
+              )}
+              {errors.password?.type === "maxLength" && (
+                <p className="text-sm text-red-500 mt-2" role="alert"></p>
+              )}
+              {errors.password?.type === "pattern" && (
+                <p className="text-sm text-red-500 mt-2" role="alert">
+                  Password must be at least one number and one special character
+                </p>
+              )}
             </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
