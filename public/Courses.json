@@ -1,0 +1,90 @@
+[
+  {
+    "image": "image_url_1.jpg",
+    "course_Name": "Photography Basics",
+    "instructor_Name": "John Smith",
+    "instructor_Email": "john.smith@example.com",
+    "available_Seats": 20,
+    "price": 99.99,
+    "course_Description": "Learn the fundamentals of photography, including camera settings, composition, and exposure.",
+    "category": "Beginner",
+    "popular": false
+  },
+  {
+    "image": "image_url_2.jpg",
+    "course_Name": "Portrait Photography",
+    "instructor_Name": "Sarah Johnson",
+    "instructor_Email": "sarah.johnson@example.com",
+    "available_Seats": 15,
+    "price": 149.99,
+    "course_Description": "Master the art of capturing stunning portraits, including lighting techniques and posing.",
+    "category": "Intermediate",
+    "popular": true
+  },
+  {
+    "image": "image_url_3.jpg",
+    "course_Name": "Landscape Photography",
+    "instructor_Name": "Michael Thompson",
+    "instructor_Email": "michael.thompson@example.com",
+    "available_Seats": 10,
+    "price": 199.99,
+    "course_Description": "Explore the beauty of nature through landscape photography, including composition and post-processing.",
+    "category": "Advanced",
+    "popular": true
+  },
+  {
+    "image": "image_url_4.jpg",
+    "course_Name": "Night Photography",
+    "instructor_Name": "Jennifer Lee",
+    "instructor_Email": "jennifer.lee@example.com",
+    "available_Seats": 12,
+    "price": 129.99,
+    "course_Description": "Learn to capture stunning photos in low light conditions and master long exposures.",
+    "category": "Intermediate",
+    "popular": false
+  },
+  {
+    "image": "image_url_5.jpg",
+    "course_Name": "Street Photography",
+    "instructor_Name": "David Rodriguez",
+    "instructor_Email": "david.rodriguez@example.com",
+    "available_Seats": 8,
+    "price": 149.99,
+    "course_Description": "Discover the art of capturing authentic moments and stories in the streets.",
+    "category": "Intermediate",
+    "popular": true
+  },
+  {
+    "image": "image_url_6.jpg",
+    "course_Name": "Wildlife Photography",
+    "instructor_Name": "Emily Anderson",
+    "instructor_Email": "emily.anderson@example.com",
+    "available_Seats": 10,
+    "price": 179.99,
+    "course_Description": "Learn the techniques and strategies to capture captivating wildlife photos.",
+    "category": "Advanced",
+    "popular": false
+  },
+  {
+    "image": "image_url_7.jpg",
+    "course_Name": "Fashion Photography",
+    "instructor_Name": "Alex Davis",
+    "instructor_Email": "alex.davis@example.com",
+    "available_Seats": 15,
+    "price": 199.99,
+    "course_Description": "Master the art of capturing fashion and beauty through photography.",
+    "category": "Advanced",
+    "popular": true
+  },
+  {
+    "image": "image_url_8.jpg",
+    "course_Name": "Food Photography",
+    "instructor_Name": "Sophia Roberts",
+    "instructor_Email": "sophia.roberts@example.com",
+    "available_Seats": 10,
+    "price": 129.99,
+    "course_Description": "Discover the secrets of capturing delicious and visually appealing food photographs.",
+    "category": "Intermediate",
+    "popular": true
+  }
+]

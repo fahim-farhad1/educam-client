@@ -1,0 +1,39 @@
+{
+  "reviews": [
+    {
+      "image": "image_url_1.jpg",
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "review": "I took the Photography Basics course and it was fantastic! The instructor explained everything clearly, and I learned a lot about camera settings and composition. Highly recommended!",
+      "rating": 5
+    },
+    {
+      "image": "image_url_2.jpg",
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "review": "The Portrait Photography course exceeded my expectations. Sarah is an amazing instructor who provided valuable insights into lighting and posing. I improved my portrait photography skills significantly!",
+      "rating": 4.5
+    },
+    {
+      "image": "image_url_3.jpg",
+      "name": "Robert Johnson",
+      "email": "robert.johnson@example.com",
+      "review": "I'm so glad I took the Landscape Photography course. Michael's expertise and guidance helped me capture breathtaking landscapes. The course material was comprehensive, and I now have a solid foundation in landscape photography.",
+      "rating": 4
+    },
+    {
+      "image": "image_url_4.jpg",
+      "name": "Emily Wilson",
+      "email": "emily.wilson@example.com",
+      "review": "I highly recommend the Street Photography course. David's teaching style is engaging, and I learned how to capture the essence of urban life. This course gave me a new perspective on photography!",
+      "rating": 4.5
+    },
+    {
+      "image": "image_url_5.jpg",
+      "name": "Samuel Brown",
+      "email": "samuel.brown@example.com",
+      "review": "The Wildlife Photography course with Emily was outstanding! Her passion for wildlife photography is contagious, and I learned valuable techniques to capture stunning wildlife shots. I'm now more confident in my wildlife photography skills.",
+      "rating": 5
+    }
+  ]
+}
