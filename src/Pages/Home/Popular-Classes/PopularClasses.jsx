@@ -1,32 +1,41 @@
 import React, { useEffect, useState } from "react";
+import Container from "../../../Components/Shared/Container";
+// import useStudent from "../../../Hooks/Students";
 
 const PopularClasses = () => {
   const [popularClasses, setPopularClasses] = useState([]);
-  const { image, course_Name, course_Description, price } = popularClasses;
   useEffect(() => {
     fetch("http://localhost:3000/students")
       .then((res) => res.json())
-      .then((data) => setPopularClasses(data));
+      .then((data) => setPopularClasses(data.slice(0, 6)));
   }, []);
-  console.log(popularClasses);
+  console.log(popularClasses.length);
+  //   const { image, course_Name, course_Description, price } = popularClasses;
+  // const [data, refetch] = useStudent;
   return (
-    <div>
-      <h1 className="text-5xl text-center text-orange-500">Popular Classes</h1>
-      <div className="card w-96 bg-base-100 shadow-xl">
-        <figure>
-          <img src={image} alt="Shoes" />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">{course_Name}</h2>
-          <p>{course_Description}</p>
-          <p>${price}</p>
-          <div className="card-actions justify-end">
-            <div className="badge badge-outline">Fashion</div>
-            <div className="badge badge-outline">Products</div>
-          </div>
-        </div>
-      </div>
-    </div>
+   <Container> <div>
+   <h1 className="text-5xl text-center text-orange-500">Popular Classes</h1>
+   <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+     {popularClasses.map((classes) => (
+       <>
+         <div className="card w-full bg-base-100 shadow-xl">
+           <figure>
+             <img src={classes.image} alt="Shoes" />
+           </figure>
+           <div className="card-body">
+             <h2 className="card-title">{classes.course_Name}</h2>
+             <p>{classes.course_Description}</p>
+             <p>${classes.price}</p>
+             <div className="card-actions justify-end">
+               <div className="badge badge-outline">Fashion</div>
+               <div className="badge badge-outline">Products</div>
+             </div>
+           </div>
+         </div>
+       </>
+     ))}
+   </div>
+ </div></Container>
   );
 };
 

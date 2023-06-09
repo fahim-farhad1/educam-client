@@ -5,7 +5,6 @@ import IMG1 from "../../../assets/Banner-IMG/sub-buzz-5459-1584497938-7.jpg";
 import IMG2 from "../../../assets/Banner-IMG/Short-Term-1-1.webp";
 import IMG3 from "../../../assets/Banner-IMG/photography-course.jpg";
 import IMG4 from "../../../assets/Banner-IMG/How-to-start-your-photography-career-slr-lounge-1200x675.jpg";
-
 const Banner = () => {
   return (
     <div className="carousel w-full h-[500px]">
