@@ -8,7 +8,7 @@
     "price": 99.99,
     "course_Description": "Learn the fundamentals of photography, including camera settings, composition, and exposure.",
     "category": "Beginner",
-    "popular": false
+    "students": 8
   },
   {
     "image": "image_url_2.jpg",
@@ -19,7 +19,7 @@
     "price": 149.99,
     "course_Description": "Master the art of capturing stunning portraits, including lighting techniques and posing.",
     "category": "Intermediate",
-    "popular": true
+    "students": 10
   },
   {
     "image": "image_url_3.jpg",
@@ -30,7 +30,7 @@
     "price": 199.99,
     "course_Description": "Explore the beauty of nature through landscape photography, including composition and post-processing.",
     "category": "Advanced",
-    "popular": true
+    "students": 6
   },
   {
     "image": "image_url_4.jpg",
@@ -41,7 +41,7 @@
     "price": 129.99,
     "course_Description": "Learn to capture stunning photos in low light conditions and master long exposures.",
     "category": "Intermediate",
-    "popular": false
+    "students": 12
   },
   {
     "image": "image_url_5.jpg",
@@ -52,7 +52,7 @@
     "price": 149.99,
     "course_Description": "Discover the art of capturing authentic moments and stories in the streets.",
     "category": "Intermediate",
-    "popular": true
+    "students": 9
   },
   {
     "image": "image_url_6.jpg",
@@ -63,7 +63,7 @@
     "price": 179.99,
     "course_Description": "Learn the techniques and strategies to capture captivating wildlife photos.",
     "category": "Advanced",
-    "popular": false
+    "students": 15
   },
   {
     "image": "image_url_7.jpg",
@@ -74,7 +74,7 @@
     "price": 199.99,
     "course_Description": "Master the art of capturing fashion and beauty through photography.",
     "category": "Advanced",
-    "popular": true
+    "students": 7
   },
   {
     "image": "image_url_8.jpg",
@@ -85,6 +85,39 @@
     "price": 129.99,
     "course_Description": "Discover the secrets of capturing delicious and visually appealing food photographs.",
     "category": "Intermediate",
-    "popular": true
+    "students": 11
+  },
+  {
+    "image": "image_url_9.jpg",
+    "course_Name": "Architectural Photography",
+    "instructor_Name": "Michael Johnson",
+    "instructor_Email": "michael.johnson@example.com",
+    "available_Seats": 8,
+    "price": 149.99,
+    "course_Description": "Learn to capture stunning architectural images, including composition and perspective.",
+    "category": "Intermediate",
+    "students": 8
+  },
+  {
+    "image": "image_url_10.jpg",
+    "course_Name": "Travel Photography",
+    "instructor_Name": "Sophie Anderson",
+    "instructor_Email": "sophie.anderson@example.com",
+    "available_Seats": 12,
+    "price": 129.99,
+    "course_Description": "Capture memorable travel photos with tips on storytelling and composition.",
+    "category": "Intermediate",
+    "students": 10
+  },
+  {
+    "image": "image_url_11.jpg",
+    "course_Name": "Black and White Photography",
+    "instructor_Name": "Adam Wilson",
+    "instructor_Email": "adam.wilson@example.com",
+    "available_Seats": 10,
+    "price": 99.99,
+    "course_Description": "Master the art of black and white photography with emphasis on tones and contrast.",
+    "category": "Intermediate",
+    "students": 7
   }
 ]
