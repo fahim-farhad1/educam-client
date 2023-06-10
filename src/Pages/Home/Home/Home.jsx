@@ -12,7 +12,6 @@ const Home = () => {
             <PopularClasses></PopularClasses>
             <Container><PopularInstructors /></Container>
             <h1 className='text-center text-7xl font-bold text-green-600'>To Do:------- add extra section</h1>
-            <Footer></Footer>
         </div>
     );
 };
