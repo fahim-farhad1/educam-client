@@ -1,6 +1,6 @@
 import React from "react";
 
-const Instructors = () => {
+const InstructorsDashboard = () => {
   return (
     <div>
       <p className="text-center text-green-600 text-5xl">
@@ -10,4 +10,4 @@ const Instructors = () => {
   );
 };
 
-export default Instructors;
+export default InstructorsDashboard;

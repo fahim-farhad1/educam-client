@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const Login = () => {
   const { signIn, signInWithGoogle } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || '/';
   const {
     register,
     handleSubmit,
@@ -15,6 +19,7 @@ const Login = () => {
     signIn(data.email, data.password)
       .then((result) => {
         const loggedUser = result.user;
+        navigate(from, {replace: true});
         console.log(loggedUser);
       })
       .catch((error) => {
@@ -26,6 +31,7 @@ const Login = () => {
     signInWithGoogle()
       .then((result) => {
         const loggedUser = result.user;
+        navigate(from, {replace: true});
         console.log(loggedUser);
       })
       .catch((error) => {

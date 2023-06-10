@@ -1,6 +1,6 @@
 import React from "react";
 
-const Student = () => {
+const StudentDashboard = () => {
   return (
     <div>
       <p className="text-center text-yellow-700 text-3xl">
@@ -10,4 +10,4 @@ const Student = () => {
   );
 };
 
-export default Student;
+export default StudentDashboard;

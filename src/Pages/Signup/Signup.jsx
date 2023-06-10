@@ -1,10 +1,15 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const IMGBB_API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
+
 const Signup = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || '/';
   const {
     register,
     handleSubmit,
@@ -18,6 +23,7 @@ const Signup = () => {
     createUser(data.email, data.password)
       .then((result) => {
         const loggedUser = result.user;
+        navigate(from, {replace: true});
         console.log(loggedUser);
       })
       .catch((error) => {
@@ -41,6 +47,7 @@ const Signup = () => {
     signInWithGoogle()
       .then((result) => {
         const loggedUser = result.user;
+        navigate(from, {replace: true});
         console.log(loggedUser);
       })
       .catch((error) => {
