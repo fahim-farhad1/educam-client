@@ -1,0 +1,66 @@
+[
+  {
+    "instructor_image": "instructor_image_url_1.jpg",
+    "instructor_name": "John Smith",
+    "instructor_email": "john.smith@example.com",
+    "instructor_courses": ["Photography Basics", "Portrait Photography"],
+    "course_price": 99.99,
+    "rating": 4.5
+  },
+  {
+    "instructor_image": "instructor_image_url_2.jpg",
+    "instructor_name": "Sarah Johnson",
+    "instructor_email": "sarah.johnson@example.com",
+    "instructor_courses": ["Landscape Photography", "Night Photography"],
+    "course_price": 149.99,
+    "rating": 4.8
+  },
+  {
+    "instructor_image": "instructor_image_url_3.jpg",
+    "instructor_name": "Michael Thompson",
+    "instructor_email": "michael.thompson@example.com",
+    "instructor_courses": ["Street Photography", "Wildlife Photography"],
+    "course_price": 199.99,
+    "rating": 4.6
+  },
+  {
+    "instructor_image": "instructor_image_url_4.jpg",
+    "instructor_name": "Emily Anderson",
+    "instructor_email": "emily.anderson@example.com",
+    "instructor_courses": ["Fashion Photography", "Product Photography"],
+    "course_price": 129.99,
+    "rating": 4.4
+  },
+  {
+    "instructor_image": "instructor_image_url_5.jpg",
+    "instructor_name": "David Rodriguez",
+    "instructor_email": "david.rodriguez@example.com",
+    "instructor_courses": ["Street Photography", "Documentary Photography"],
+    "course_price": 149.99,
+    "rating": 4.7
+  },
+  {
+    "instructor_image": "instructor_image_url_6.jpg",
+    "instructor_name": "Sophia Roberts",
+    "instructor_email": "sophia.roberts@example.com",
+    "instructor_courses": ["Food Photography", "Still Life Photography"],
+    "course_price": 129.99,
+    "rating": 4.3
+  },
+  {
+    "instructor_image": "instructor_image_url_7.jpg",
+    "instructor_name": "Michael Johnson",
+    "instructor_email": "michael.johnson@example.com",
+    "instructor_courses": ["Architectural Photography", "Interior Photography"],
+    "course_price": 149.99,
+    "rating": 4.6
+  },
+  {
+    "instructor_image": "instructor_image_url_8.jpg",
+    "instructor_name": "Sophie Anderson",
+    "instructor_email": "sophie.anderson@example.com",
+    "instructor_courses": ["Travel Photography", "Adventure Photography"],
+    "course_price": 129.99,
+    "rating": 4.9
+  }
+]
