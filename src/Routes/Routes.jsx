@@ -7,40 +7,48 @@ import Signup from "../Pages/Signup/Signup";
 import Instructors from "../Pages/Instructors/Instructors";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layouts/Dashboard";
-
+import SelectedClasses from "../Pages/Classes/SelectedClasses";
+import EnrolledClasses from "../Pages/Classes/EnrolledClasses";
 
 export const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Main></Main>,
-      children: [
-        {
-            path: '/',
-            element: <Home></Home>
-        },
-        {
-          path: 'instructors',
-          element: <Instructors></Instructors>
-        },
-        {
-          path: 'classes',
-          element: <Classes></Classes>
-        },
-        {
-          path: 'login',
-          element: <Login></Login>
-        },
-        {
-          path: 'signup',
-          element: <Signup></Signup>
-        }
-      ]
-    },
-    {
-      path: 'dashboard',
-      element: <PrivateRoute><Dashboard /></PrivateRoute>,
-      children: [
-        
-      ]
-    }
-  ]);
+  {
+    path: "/",
+    element: <Main></Main>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "instructors",
+        element: <Instructors></Instructors>,
+      },
+      {
+        path: "classes",
+        element: <Classes></Classes>,
+      },
+      {
+        path: "login",
+        element: <Login></Login>,
+      },
+      {
+        path: "signup",
+        element: <Signup></Signup>,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <PrivateRoute><Dashboard /></PrivateRoute>,
+    children: [
+      {
+        path: "selectedClasses",
+        element: <SelectedClasses />,
+      },
+      {
+        path: "enrolledClasses",
+        element: <EnrolledClasses />,
+      }
+    ]
+  },
+]);

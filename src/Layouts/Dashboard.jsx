@@ -1,11 +1,24 @@
 import React, { useContext } from "react";
+
 import avatar from "../assets/avatar/placeholder.jpg";
 import { AuthContext } from "../Provider/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import logo from "../assets/Logo/logo.png";
 
 const Dashboard = () => {
-  const { user } = useContext(AuthContext);
-
+  const { user, logOut } = useContext(AuthContext);
+  const menuItem = (
+    <>
+      <Link to="/dashboard/selectedClasses">
+        {" "}
+        <li className="text-lg font-bold"> My Selected Classes </li>
+      </Link>
+      <Link to="/dashboard/enrolledClasses">
+        {" "}
+        <li className="text-lg font-bold mt-3"> My Enrolled Classes </li>
+      </Link>
+    </>
+  );
   const handelLogOut = () => {
     logOut()
       .then(() => {})
@@ -38,7 +51,9 @@ const Dashboard = () => {
               </svg>
             </label>
           </div>
-          <div className="flex-1 px-2 mx-2">Navbar Title</div>
+          <div className="flex-1 px-2 mx-2">
+            <img src={logo} alt="logo" />
+          </div>
           <div>
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -75,27 +90,20 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <ul className="menu p-4 w-72 h-screen hidden md:block bg-base-200 text-base-content">
-          {/* Sidebar content here */}
-          <li>
-            <a>Sidebar Item 1</a>
-          </li>
-          <li>
-            <a>Sidebar Item 2</a>
-          </li>
-        </ul>
+        <div className="flex">
+          <ul className="menu p-4 w-72 h-screen hidden md:block bg-base-200 text-base-content">
+            {/* Sidebar content here */}
+          {menuItem}
+          </ul>
+          <Outlet></Outlet>
+        </div>
         {/* Page content here */}
       </div>
       <div className="drawer-side mt-[67px]">
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 h-full bg-base-200">
-          {/* Sidebar content here */}
-          <li>
-            <a>Sidebar Item 1</a>
-          </li>
-          <li>
-            <a>Sidebar Item 2</a>
-          </li>
+          {/* hidden Sidebar content here */}
+          {menuItem}
         </ul>
       </div>
     </div>
