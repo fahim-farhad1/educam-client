@@ -5,7 +5,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 const useAddedClass = () => {
   const { user } = useContext(AuthContext);
 
-  const { isLoading, data:addedClass = [], refetch } = useQuery({
+  const { data:addedClass = [], refetch } = useQuery({
     queryKey: ['addClasses', user?.email],
     queryFn: async () =>{
       const response = await fetch(`http://localhost:3000/addedclass?email=${user?.email}`)
@@ -13,6 +13,6 @@ const useAddedClass = () => {
       return response.json();
     }
   });
-  return [addedClass, isLoading, refetch]
+  return [addedClass, refetch]
 };
 export default useAddedClass;

@@ -20,7 +20,7 @@ const Classes = () => {
   const handelSelect = (classes) =>{
     const {_id, course_name, course_image, course_price} = classes ;
     if(user && user.email){
-      const addClass = {classId: _id, course_name, course_image, course_price, email: user.email}
+      const addClass = {classId: _id, course_name, course_image, course_price, course_instructor, email: user.email}
       fetch('http://localhost:3000/addtoclass',{
         method: "POST",
         headers: {
