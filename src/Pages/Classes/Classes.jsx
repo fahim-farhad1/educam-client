@@ -1,23 +1,53 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from "../../Components/Shared/Container";
+import { AuthContext } from "../../Provider/AuthProvider";
+import {useLocation, useNavigate } from "react-router-dom";
 
 const Classes = () => {
-  const [popularClasses, setPopularClasses] = useState([]);
+  const [Classes, setClasses] = useState([]);
+  const {user} = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
-    fetch("http://localhost:3000/popular")
+    fetch("http://localhost:3000/classes",)
       .then((res) => res.json())
-      .then((data) => setPopularClasses(data));
+      .then((data) => setClasses(data));
   }, []);
-  console.log(popularClasses);
+  console.log(Classes);
+
+
+  const handelSelect = (classes) =>{
+    const {_id, course_name, course_image, course_price} = classes ;
+    if(user && user.email){
+      const addClass = {classId: _id, course_name, course_image, course_price, email: user.email}
+      fetch('http://localhost:3000/addtoclass',{
+        method: "POST",
+        headers: {
+          'content-type' : 'application/json'
+        },
+        body: JSON.stringify(addClass)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.insertedId){
+          alert('item added!');
+        }
+      })
+    }
+    else{
+      navigate('/login', {state: {from: location}});
+    }
+    console.log(classes);
+  }
   return (
     <Container>
-      {" "}
       <div>
         <h1 className="text-5xl text-center text-orange-500">
           Popular Classes
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {popularClasses.map((classes) => (
+          {Classes.map((classes) => (
             <>
               <div className="card w-full bg-base-100 shadow-xl">
                 <figure>
@@ -29,7 +59,7 @@ const Classes = () => {
                   <p>Available seats: {classes.available_seats}</p>
                   <p><span>Price: </span>${classes.course_price}</p>
                   <div className="card-actions justify-end">
-                    <div className="badge badge-outline">Select Button</div>
+                    <button onClick={() => handelSelect(classes)} className="btn btn-sm w-full">Select</button>
                   </div>
                 </div>
               </div>

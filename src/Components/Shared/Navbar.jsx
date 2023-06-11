@@ -4,9 +4,10 @@ import { FaUserCircle } from "react-icons/fa";
 import Logo from "../../assets/Logo/logo.png";
 import Container from "./Container";
 import { AuthContext } from "../../Provider/AuthProvider";
+import avatar from '../../assets/avatar/placeholder.jpg'
 
 const Navbar = () => {
-  const { user, logOut,} = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const handelLogOut = () => {
     logOut()
       .then(() => {})
@@ -89,22 +90,34 @@ const Navbar = () => {
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div>
-                    <FaUserCircle className="h-12 w-12 rounded-full" />
+                  <img className=" rounded-full" src={avatar} alt="profile" />
                   </div>
                 </label>
                 <ul
                   tabIndex={0}
                   className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                 >
-                  <li>
-                    <Link to="#">Profile</Link>
-                  </li>
-                  <li>
-                    <Link to="/signup">Sign up</Link>
-                  </li>
-                  <li>
-                    <button onClick={handelLogOut} className="btn-sm">Logout</button>
-                  </li>
+                  {user ? (
+                    <>
+                      <li>
+                        <Link to="#">Profile</Link>
+                      </li>
+                      <li>
+                        <button onClick={handelLogOut} className="btn-sm">
+                          Logout
+                        </button>
+                      </li>
+                    </>
+                  ) : (
+                    <>
+                      <li>
+                        <Link to="/login">Login</Link>
+                      </li>
+                      <li>
+                        <Link to="/signup">Sign up</Link>
+                      </li>
+                    </>
+                  )}
                 </ul>
               </div>
             </div>

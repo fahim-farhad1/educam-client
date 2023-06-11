@@ -9,13 +9,15 @@ const Signup = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
-  const { createUser, signInWithGoogle } = useContext(AuthContext);
+  const { createUser, signInWithGoogle, userProfileUpdate } =
+    useContext(AuthContext);
   const imgHosting = `https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`;
 
   const onSubmit = (data) => {
@@ -23,9 +25,20 @@ const Signup = () => {
     createUser(data.email, data.password)
       .then((result) => {
         const loggedUser = result.user;
-        navigate(from, {replace: true});
+
         console.log(loggedUser);
+        userProfileUpdate(data.name, data.image)
+          .then(() => {
+            console.log("Profile updated!");
+          })
+          .catch((error) => {
+            const message = error.message;
+            console.log(message);
+          });
+        reset();
+        navigate(from, { replace: true });
       })
+
       .catch((error) => {
         const message = error.message;
         console.log(message);
@@ -47,7 +60,7 @@ const Signup = () => {
     signInWithGoogle()
       .then((result) => {
         const loggedUser = result.user;
-        navigate(from, {replace: true});
+        navigate(from, { replace: true });
         console.log(loggedUser);
       })
       .catch((error) => {
