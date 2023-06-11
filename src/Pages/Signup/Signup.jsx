@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const IMGBB_API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
 
@@ -25,8 +26,17 @@ const Signup = () => {
     createUser(data.email, data.password)
       .then((result) => {
         const loggedUser = result.user;
+        // create user successful alert
+        Swal.fire({
+          position: 'top-center',
+          icon: 'success',
+          title: 'Account Create Successfully',
+          showConfirmButton: false,
+          timer: 1500
+        })
 
         console.log(loggedUser);
+
         userProfileUpdate(data.name, data.image)
           .then(() => {
             console.log("Profile updated!");
@@ -35,12 +45,19 @@ const Signup = () => {
             const message = error.message;
             console.log(message);
           });
+
         reset();
         navigate(from, { replace: true });
       })
 
       .catch((error) => {
         const message = error.message;
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong! Please try again.',
+          
+        })
         console.log(message);
       });
     const formData = new FormData();
@@ -60,6 +77,14 @@ const Signup = () => {
     signInWithGoogle()
       .then((result) => {
         const loggedUser = result.user;
+         // Login alert 
+         Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Login Successfully!😃',
+          showConfirmButton: false,
+          timer: 1500
+        })
         navigate(from, { replace: true });
         console.log(loggedUser);
       })

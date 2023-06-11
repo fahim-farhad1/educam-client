@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { signIn, signInWithGoogle } = useContext(AuthContext);
@@ -19,6 +20,14 @@ const Login = () => {
     signIn(data.email, data.password)
       .then((result) => {
         const loggedUser = result.user;
+         // Login alert 
+         Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Login Successfully!😃',
+          showConfirmButton: false,
+          timer: 1500
+        })
         navigate(from, {replace: true});
         console.log(loggedUser);
       })
@@ -31,6 +40,14 @@ const Login = () => {
     signInWithGoogle()
       .then((result) => {
         const loggedUser = result.user;
+        // Login alert 
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Login Successfully!😃',
+          showConfirmButton: false,
+          timer: 1500
+        })
         navigate(from, {replace: true});
         console.log(loggedUser);
       })

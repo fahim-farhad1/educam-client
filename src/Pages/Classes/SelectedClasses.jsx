@@ -11,12 +11,12 @@ const SelectedClasses = () => {
     console.log(_id);
     Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "You want to deleted it?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(`http://localhost:3000/addedclass/${_id}`, {
@@ -25,8 +25,12 @@ const SelectedClasses = () => {
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
-                refetch()
-              Swal.fire("Deleted!", "Your added Course has been delete.", "success");
+              refetch();
+              Swal.fire(
+                "Deleted!",
+                "Your added Course has been delete.",
+                "success"
+              );
             }
           });
       }
@@ -34,7 +38,7 @@ const SelectedClasses = () => {
   };
   return (
     <DashboardContainer>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto flex">
         <table className="table">
           {/* head */}
           <thead className="text-center">
@@ -43,7 +47,6 @@ const SelectedClasses = () => {
               <th>Instructor</th>
               <th>Course</th>
               <th>Price</th>
-              <th>Payment</th>
             </tr>
           </thead>
           <tbody>
@@ -75,14 +78,28 @@ const SelectedClasses = () => {
                   </td>
                   <td>{classes.course_name}</td>
                   <td>${classes.course_price}</td>
-                  <th>
-                    <button className="btn btn-ghost btn-xs">Pay Now</button>
-                  </th>
                 </tr>
               </>
             ))}
           </tbody>
         </table>
+        <div className=" w-72 bg-base-200 rounded-md">
+          <h1 className="text-center mt-5">Payment Summery</h1>
+          <div className="divider -mt-1"></div>
+          <div className="ml-3">
+            <p>Courses : </p>
+            <p>Amount:$ </p>
+            <p>Tex :$</p>
+            <p>Discount:$ </p>
+          </div>
+          <div className="divider"></div>
+          <p className="text-center">
+            Total:$ <span className="text-red-500"></span>
+          </p>
+          <div className="p-3">
+            <button className="btn btn-success w-full">Pay Now </button>
+          </div>
+        </div>
       </div>
     </DashboardContainer>
   );

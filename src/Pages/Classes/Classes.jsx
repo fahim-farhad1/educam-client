@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Container from "../../Components/Shared/Container";
 import { AuthContext } from "../../Provider/AuthProvider";
 import {useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Classes = () => {
   const [Classes, setClasses] = useState([]);
@@ -18,7 +19,7 @@ const Classes = () => {
 
 
   const handelSelect = (classes) =>{
-    const {_id, course_name, course_image, course_price} = classes ;
+    const {_id, course_name, course_image, course_instructor, course_price} = classes ;
     if(user && user.email){
       const addClass = {classId: _id, course_name, course_image, course_price, course_instructor, email: user.email}
       fetch('http://localhost:3000/addtoclass',{
@@ -31,7 +32,14 @@ const Classes = () => {
       .then(res => res.json())
       .then(data => {
         if(data.insertedId){
-          alert('item added!');
+          // alert 
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Course added om your Dashboard😍',
+            showConfirmButton: false,
+            timer: 1500
+          })
         }
       })
     }
