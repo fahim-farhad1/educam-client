@@ -1,12 +1,13 @@
 import React from "react";
-import useAddedClass from "../../Hooks/useAddedClass";
-import DashboardContainer from "../../Components/Shared/DashboardContainer";
+import useAddedClass from "../../../Hooks/useAddedClass";
+import DashboardContainer from "../../../Components/Shared/DashboardContainer";
 import { TiDeleteOutline } from "react-icons/ti";
 import Swal from "sweetalert2";
 
 const SelectedClasses = () => {
   const [addedClass, refetch] = useAddedClass();
   console.log(addedClass);
+    const total = addedClass.reduce((sum, classes) => classes.course_price + sum, 0)
   const handelDelete = (_id) => {
     console.log(_id);
     Swal.fire({
@@ -87,14 +88,14 @@ const SelectedClasses = () => {
           <h1 className="text-center mt-5">Payment Summery</h1>
           <div className="divider -mt-1"></div>
           <div className="ml-3">
-            <p>Courses : </p>
-            <p>Amount:$ </p>
-            <p>Tex :$</p>
-            <p>Discount:$ </p>
+            <p>Courses : <span>{addedClass.length}</span></p>
+            <p>Amount: <span>${total}</span></p>
+            <p>Tex : $0</p>
+            <p>Discount: $0</p>
           </div>
           <div className="divider"></div>
           <p className="text-center">
-            Total:$ <span className="text-red-500"></span>
+            Total: <span className="text-red-500">${total}</span>
           </p>
           <div className="p-3">
             <button className="btn btn-success w-full">Pay Now </button>

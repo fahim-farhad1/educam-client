@@ -4,10 +4,11 @@ import { FaUserCircle } from "react-icons/fa";
 import Logo from "../../assets/Logo/logo.png";
 import Container from "./Container";
 import { AuthContext } from "../../Provider/AuthProvider";
-import avatar from '../../assets/avatar/placeholder.jpg'
+import avatar from "../../assets/avatar/placeholder.jpg";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  console.log(user);
   const handelLogOut = () => {
     logOut()
       .then(() => {})
@@ -90,7 +91,24 @@ const Navbar = () => {
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div>
-                  <img className=" rounded-full" src={avatar} alt="profile" />
+                    {user ? (
+                      <>
+                        {" "}
+                        <img
+                          className=" rounded-full"
+                          src={user?.photoURL}
+                          alt="profile"
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <img
+                          className=" rounded-full"
+                          src={avatar}
+                          alt="profile"
+                        />
+                      </>
+                    )}
                   </div>
                 </label>
                 <ul

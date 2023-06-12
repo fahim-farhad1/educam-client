@@ -7,8 +7,8 @@ import Signup from "../Pages/Signup/Signup";
 import Instructors from "../Pages/Instructors/Instructors";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layouts/Dashboard";
-import SelectedClasses from "../Pages/Classes/SelectedClasses";
-import EnrolledClasses from "../Pages/Classes/EnrolledClasses";
+import SelectedClasses from "../Pages/Dashboards/Student-Dashboard/SelectedClasses";
+import EnrolledClasses from "../Pages/Dashboards/Student-Dashboard/EnrolledClasses";
 
 export const router = createBrowserRouter([
   {

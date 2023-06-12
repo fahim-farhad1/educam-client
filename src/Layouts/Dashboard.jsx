@@ -10,12 +10,10 @@ const Dashboard = () => {
   const menuItem = (
     <>
       <Link to="/dashboard/selectedClasses">
-        {" "}
-        <li className="text-lg font-bold"> My Selected Classes </li>
+        <li className="text-md "> My Selected Classes </li>
       </Link>
       <Link to="/dashboard/enrolledClasses">
-        {" "}
-        <li className="text-lg font-bold mt-3"> My Enrolled Classes </li>
+        <li className="text-md mt-3"> My Enrolled Classes </li>
       </Link>
     </>
   );

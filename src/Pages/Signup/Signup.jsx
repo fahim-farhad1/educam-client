@@ -23,43 +23,7 @@ const Signup = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    createUser(data.email, data.password)
-      .then((result) => {
-        const loggedUser = result.user;
-        // create user successful alert
-        Swal.fire({
-          position: 'top-center',
-          icon: 'success',
-          title: 'Account Create Successfully',
-          showConfirmButton: false,
-          timer: 1500
-        })
-
-        console.log(loggedUser);
-
-        userProfileUpdate(data.name, data.image)
-          .then(() => {
-            console.log("Profile updated!");
-          })
-          .catch((error) => {
-            const message = error.message;
-            console.log(message);
-          });
-
-        reset();
-        navigate(from, { replace: true });
-      })
-
-      .catch((error) => {
-        const message = error.message;
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong! Please try again.',
-          
-        })
-        console.log(message);
-      });
+    // image upload
     const formData = new FormData();
     formData.append("image", data.image[0]);
 
@@ -70,21 +34,55 @@ const Signup = () => {
       .then((res) => res.json())
       .then((imageData) => {
         const imageUrl = imageData.data.display_url;
-        console.log(imageUrl);
+        // create user
+        createUser(data.email, data.password)
+          .then((result) => {
+            const loggedUser = result.user;
+            // create user successful alert
+            Swal.fire({
+              position: "top-center",
+              icon: "success",
+              title: "Account Create Successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            console.log(loggedUser);
+
+            userProfileUpdate(data.name, imageUrl)
+              .then(() => {
+                console.log("Profile updated!", data.name, imageUrl);
+              })
+              .catch((error) => {
+                const message = error.message;
+                console.log(message);
+              });
+          })
+          .catch((error) => {
+            const message = error.message;
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong! Please try again.",
+            });
+            console.log(message);
+          });
+          reset();
+          navigate(from, { replace: true });
       });
   };
+
   const handelGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {
         const loggedUser = result.user;
-         // Login alert 
-         Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Login Successfully!😃',
+        // Login alert
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login Successfully!😃",
           showConfirmButton: false,
-          timer: 1500
-        })
+          timer: 1500,
+        });
         navigate(from, { replace: true });
         console.log(loggedUser);
       })
@@ -120,6 +118,7 @@ const Signup = () => {
               <label className="block mb-2 text-sm">Select Image:</label>
               <input
                 type="file"
+                accept="image/*"
                 {...register("image", { required: "image is required" })}
               />
               {errors.image && (
