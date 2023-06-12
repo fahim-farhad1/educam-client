@@ -1,14 +1,14 @@
 import React from "react";
 import DashboardContainer from "../../../Components/Shared/DashboardContainer";
 
-const EnrolledClasses = () => {
+const MyPayments = () => {
   return (
     <DashboardContainer>
       <div>
-        <p>this is enrolled classes</p>
+        <p>Its my payments page!</p>
       </div>
     </DashboardContainer>
   );
 };
 
-export default EnrolledClasses;
+export default MyPayments;

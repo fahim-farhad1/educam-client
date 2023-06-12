@@ -2,20 +2,25 @@ import React, { useContext } from "react";
 
 import avatar from "../assets/avatar/placeholder.jpg";
 import { AuthContext } from "../Provider/AuthProvider";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import logo from "../assets/Logo/logo.png";
 
 const Dashboard = () => {
   const { user, logOut } = useContext(AuthContext);
+  // to do admin
+  const isAdmin = true;
   const menuItem = (
-    <>
-      <Link to="/dashboard/selectedClasses">
+    <div>
+      <NavLink to="/dashboard/selectedClasses">
         <li className="text-md "> My Selected Classes </li>
-      </Link>
-      <Link to="/dashboard/enrolledClasses">
+      </NavLink>
+      <NavLink to="/dashboard/enrolledClasses">
         <li className="text-md mt-3"> My Enrolled Classes </li>
-      </Link>
-    </>
+      </NavLink>
+      <NavLink to="/dashboard/mypayments">
+        <li className="text-md mt-3"> My Payments </li>
+      </NavLink>
+    </div>
   );
   const handelLogOut = () => {
     logOut()
@@ -56,7 +61,25 @@ const Dashboard = () => {
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div>
-                  <img className=" rounded-full" src={avatar} alt="profile" />
+                  {user ? (
+                    <>
+                      {" "}
+                      <img
+                        className=" rounded-full"
+                        src={user.photoURL}
+                        alt="profile"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      {" "}
+                      <img
+                        className=" rounded-full"
+                        src={avatar}
+                        alt="profile"
+                      />
+                    </>
+                  )}
                 </div>
               </label>
               <ul
@@ -66,7 +89,7 @@ const Dashboard = () => {
                 {user ? (
                   <>
                     <li>
-                      <Link to="#">Profile</Link>
+                      <NavLink to="#">Profile</NavLink>
                     </li>
                     <li>
                       <button onClick={handelLogOut} className="btn-sm">
@@ -77,10 +100,10 @@ const Dashboard = () => {
                 ) : (
                   <>
                     <li>
-                      <Link to="/login">Login</Link>
+                      <NavLink to="/login"> Login</NavLink>
                     </li>
                     <li>
-                      <Link to="/signup">Sign up</Link>
+                      <NavLink to="/signup">Sign up</NavLink>{" "}
                     </li>
                   </>
                 )}
@@ -91,7 +114,7 @@ const Dashboard = () => {
         <div className="flex">
           <ul className="menu p-4 w-72 h-screen hidden md:block bg-base-200 text-base-content">
             {/* Sidebar content here */}
-          {menuItem}
+            {menuItem}
           </ul>
           <Outlet></Outlet>
         </div>
