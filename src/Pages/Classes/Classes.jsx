@@ -22,14 +22,14 @@ const Classes = () => {
       classes;
     if (user && user.email) {
       const addClass = {
-        classId: _id,
+        classId:_id,
         course_name,
         course_image,
         course_price,
         course_instructor,
         email: user.email,
       };
-      fetch("http://localhost:3000/addtoclass", {
+      fetch('http://localhost:3000/addtoclass', {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -38,7 +38,7 @@ const Classes = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          if (data.insertedId) {
+          if (data?.insertedId) {
             // alert
             Swal.fire({
               position: "top-end",
@@ -47,9 +47,17 @@ const Classes = () => {
               showConfirmButton: false,
               timer: 1500,
             });
-            
+            console.log(classes);
+          }
+          else{
+            Swal.fire({
+              icon: 'error',
+              title: 'Sorry!',
+              text: 'Class already added',
+            })
           }
         });
+        
     } else {
       // alert
       Swal.fire({
@@ -66,7 +74,6 @@ const Classes = () => {
         }
       });
     }
-    console.log(classes);
   };
   return (
     <Container>

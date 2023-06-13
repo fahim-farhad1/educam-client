@@ -20,7 +20,7 @@ const SelectedClasses = () => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/addedclass/${_id}`, {
+        fetch(`http://localhost:3000/addtoclass/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

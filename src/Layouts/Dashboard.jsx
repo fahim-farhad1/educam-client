@@ -10,7 +10,7 @@ const Dashboard = () => {
   // to do admin
   const isAdmin = true;
   const isInstructors = false;
-  const inStudents = false;
+  const inStudents = true;
   const menuItem = (
     <div>
       {isAdmin && 

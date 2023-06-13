@@ -8,7 +8,7 @@ const useAddedClass = () => {
   const { data:addedClass = [], refetch } = useQuery({
     queryKey: ['addClasses', user?.email],
     queryFn: async () =>{
-      const response = await fetch(`http://localhost:3000/addedclass?email=${user?.email}`)
+      const response = await fetch(`http://localhost:3000/addtoclass?email=${user?.email}`)
 
       return response.json();
     }
