@@ -9,17 +9,41 @@ const Dashboard = () => {
   const { user, logOut } = useContext(AuthContext);
   // to do admin
   const isAdmin = true;
+  const isInstructors = false;
+  const inStudents = false;
   const menuItem = (
     <div>
-      <NavLink to="/dashboard/selectedClasses">
-        <li className="text-md "> My Selected Classes </li>
-      </NavLink>
-      <NavLink to="/dashboard/enrolledClasses">
-        <li className="text-md mt-3"> My Enrolled Classes </li>
-      </NavLink>
-      <NavLink to="/dashboard/mypayments">
-        <li className="text-md mt-3"> My Payments </li>
-      </NavLink>
+      {isAdmin && 
+      <div>
+          <NavLink to="/dashboard/manageClasses">
+            <li className="text-md ">Manage Classes</li>
+          </NavLink>
+          <NavLink to="/dashboard/manageUsers">
+            <li className="text-md ">Manage Users</li>
+          </NavLink>
+      </div>}
+      {isInstructors && 
+        <>
+           <NavLink to="/dashboard/addClass">
+            <li className="text-md "> Add Class </li>
+          </NavLink>
+           <NavLink to="/dashboard/myClasses">
+            <li className="text-md ">My Classes </li>
+          </NavLink>
+        </>}
+      {inStudents && (
+        <>
+          <NavLink to="/dashboard/selectedClasses">
+            <li className="text-md "> My Selected Classes </li>
+          </NavLink>
+          <NavLink to="/dashboard/enrolledClasses">
+            <li className="text-md mt-3"> My Enrolled Classes </li>
+          </NavLink>
+          <NavLink to="/dashboard/mypayments">
+            <li className="text-md mt-3"> My Payments </li>
+          </NavLink>
+        </>
+      )}
     </div>
   );
   const handelLogOut = () => {
