@@ -10,8 +10,8 @@ const PopularInstructors = () => {
   }, []);
   console.log(instructors);
   return (
-    <div>
-      <p className="text-5xl text-red-500 text-center">Popular Instructors</p>
+    <div className="mt-10">
+      <p className="text-3xl text-blue-500 text-center py-5">Popular Instructors</p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {instructors.map((instructor) => (
           <>
@@ -24,14 +24,12 @@ const PopularInstructors = () => {
               <div className="card-body">
                 <h2 className="card-title">{instructor.instructor_name}</h2>
                 <p>
-                  {instructor.instructor_courses.map((course) => (
-                    <li>{course}</li>
+                  {instructor.instructor_courses.map((course, index) => (
+                    <ol>
+                      <li>{index +1 }. {course}</li>
+                    </ol>
                   ))}
                 </p>
-                <div className="card-actions justify-end">
-                  <div className="badge badge-outline">Fashion</div>
-                  <div className="badge badge-outline">Products</div>
-                </div>
               </div>
             </div>
           </>

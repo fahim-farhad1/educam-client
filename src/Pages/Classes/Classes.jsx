@@ -77,10 +77,7 @@ const Classes = () => {
   };
   return (
     <Container>
-      <div>
-        <h1 className="text-5xl text-center text-orange-500">
-          Popular Classes
-        </h1>
+      <div className="py-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {Classes.map((classes) => (
             <>
@@ -98,7 +95,7 @@ const Classes = () => {
                   <div className="card-actions justify-end">
                     <button
                       onClick={() => handelSelect(classes)}
-                      className="btn btn-sm w-full"
+                      className="btn btn-sm bg-blue-400 w-full hover:bg-blue-700"
                     >
                       Select
                     </button>

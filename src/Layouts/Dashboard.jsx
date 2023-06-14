@@ -5,48 +5,31 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { NavLink, Outlet } from "react-router-dom";
 import logo from "../assets/Logo/logo.png";
 import useAdmin from "../Hooks/useAdmin";
+import GenarelRoutes from "../Components/Dashboard-Routes/GenarelRoutes";
+import AdminRoutes from "../Components/Dashboard-Routes/AdminRoutes";
+import InstructorsRoute from "../Components/Dashboard-Routes/InstructorsRoute";
+import StudentsRoutes from "../Components/Dashboard-Routes/StudentsRoutes";
 
 const Dashboard = () => {
   const { user, logOut } = useContext(AuthContext);
   // to do admin
   const isAdmin = true;
   // const [isAdmin] = useAdmin();
-  const isInstructors = false;
+  console.log(isAdmin);
+  const isInstructors = true;
   const inStudents = true;
   const menuItem = (
     <div>
       {isAdmin && (
         <div>
-          <NavLink to="/dashboard/manageClasses">
-            <li className="text-md ">Manage Classes</li>
-          </NavLink>
-          <NavLink to="/dashboard/manageUsers">
-            <li className="text-md ">Manage Users</li>
-          </NavLink>
+          <AdminRoutes></AdminRoutes>
         </div>
       )}
       {isInstructors && (
-        <>
-          <NavLink to="/dashboard/addClass">
-            <li className="text-md "> Add Class </li>
-          </NavLink>
-          <NavLink to="/dashboard/myClasses">
-            <li className="text-md ">My Classes </li>
-          </NavLink>
-        </>
+        <InstructorsRoute></InstructorsRoute>
       )}
       {inStudents && (
-        <>
-          <NavLink to="/dashboard/selectedClasses">
-            <li className="text-md "> My Selected Classes </li>
-          </NavLink>
-          <NavLink to="/dashboard/enrolledClasses">
-            <li className="text-md mt-3"> My Enrolled Classes </li>
-          </NavLink>
-          <NavLink to="/dashboard/mypayments">
-            <li className="text-md mt-3"> My Payments </li>
-          </NavLink>
-        </>
+        <StudentsRoutes></StudentsRoutes>
       )}
     </div>
   );
@@ -143,6 +126,7 @@ const Dashboard = () => {
           <ul className="menu p-4 w-72 h-screen hidden md:block bg-base-200 text-base-content">
             {/* Sidebar content here */}
             {menuItem}
+            <GenarelRoutes></GenarelRoutes>
           </ul>
           <Outlet></Outlet>
         </div>
@@ -153,6 +137,7 @@ const Dashboard = () => {
         <ul className="menu p-4 w-80 h-full bg-base-200">
           {/* hidden Sidebar content here */}
           {menuItem}
+          <GenarelRoutes></GenarelRoutes>
         </ul>
       </div>
     </div>

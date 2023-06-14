@@ -11,8 +11,7 @@ const Instructors = () => {
   console.log(instructors);
   return (
     <Container>
-      <div>
-        <p className="text-5xl text-red-500 text-center">Popular Instructors</p>
+      <div className="py-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {instructors.map((instructor) => (
             <>
@@ -23,9 +22,14 @@ const Instructors = () => {
                 <div className="card-body">
                   <h2 className="card-title">{instructor.instructor_name}</h2>
                   <p>{instructor.instructor_email}</p>
-                  <div className="card-actions justify-end">
-                    <div className="badge badge-outline">Fashion</div>
-                  </div>
+                <p className="font-bold text-orange-400">Courses:</p>
+                <p>
+                  {instructor.instructor_courses.map((course, index) => (
+                    <ol>
+                      <li>{index +1 }. {course}</li>
+                    </ol>
+                  ))}
+                </p>
                 </div>
               </div>
             </>

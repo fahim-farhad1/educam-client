@@ -3,11 +3,13 @@ import DashboardContainer from "../../../Components/Shared/DashboardContainer";
 import { useQuery } from "react-query";
 import { FaUser, FaUserTie } from "react-icons/fa";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const ManageUser = () => {
+  const [axiosSecure] = useAxiosSecure();
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:3000/students");
-    return res.json();
+    const res = await axiosSecure.get("/students");
+    return res.data;
   });
 
 
@@ -65,12 +67,8 @@ const ManageUser = () => {
                   </td>
                  <th>
                  {user.role === "admin" ? (
-                    "admin"
-                  ) : (
-                    <button className="mt-3">
-                      <FaUser className="h-8 w-8" />
-                    </button>
-                  )}
+                    "Admin"
+                  ) : 'Student'}
                  </th>
                   <th>
                     <button className="ml-3 btn btn-ghost text-white bg-red-500 btn-sm">Make Instructor</button>

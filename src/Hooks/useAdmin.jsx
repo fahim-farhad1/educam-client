@@ -8,9 +8,10 @@ const useAdmin = () => {
     // use axios secure with react query
     const {data: isAdmin, isLoading: isAdminLoading} = useQuery({
         queryKey: ['isAdmin', user?.email],
-        enabled: !loading,
+        // enabled: !loading,
         queryFn: async () => {
             const res = await axiosSecure.get(`students/admin/${user?.email}`);
+            console.log("adim 14:-",res.data);
             return res.data.admin;
         }
     })

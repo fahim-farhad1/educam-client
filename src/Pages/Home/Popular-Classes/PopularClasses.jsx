@@ -13,8 +13,8 @@ const PopularClasses = () => {
   //   const { image, course_Name, course_Description, price } = popularClasses;
   // const [data, refetch] = useStudent;
   return (
-   <Container> <div>
-   <h1 className="text-5xl text-center text-orange-500">Popular Classes</h1>
+   <Container> <div className="mt-10">
+   <h1 className="text-3xl text-center text-blue-500 py-5">Popular Classes</h1>
    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
      {popularClasses.map((classes) => (
        <>
@@ -26,10 +26,8 @@ course_image} alt="Shoes" />
            <div className="card-body">
              <h2 className="card-title">{classes.course_name}</h2>
              <p>{classes.course_description}</p>
-             <p>${classes.course_price}</p>
+             <p><span className="text-orange-400">Price: </span> ${classes.course_price}</p>
              <div className="card-actions justify-end">
-               <div className="badge badge-outline">Fashion</div>
-               <div className="badge badge-outline">Products</div>
              </div>
            </div>
          </div>
