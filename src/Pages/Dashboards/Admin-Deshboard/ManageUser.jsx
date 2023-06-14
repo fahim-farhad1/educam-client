@@ -2,8 +2,6 @@ import React from "react";
 import DashboardContainer from "../../../Components/Shared/DashboardContainer";
 import { useQuery } from "react-query";
 import { FaUser, FaUserTie } from "react-icons/fa";
-import { GrUserAdmin } from "react-icons/gr";
-import { data } from "autoprefixer";
 import Swal from "sweetalert2";
 
 const ManageUser = () => {
@@ -14,7 +12,7 @@ const ManageUser = () => {
 
 
   const handelMakeAdmin = user =>{
-    fetch(`http://localhost:3000/students/admin/${user._id}`,{
+    fetch(`http://localhost:3000/students/admin/${user.email}`,{
         method: 'PATCH'
     })
     .then(res => res.json())

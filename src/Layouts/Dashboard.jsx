@@ -4,33 +4,37 @@ import avatar from "../assets/avatar/placeholder.jpg";
 import { AuthContext } from "../Provider/AuthProvider";
 import { NavLink, Outlet } from "react-router-dom";
 import logo from "../assets/Logo/logo.png";
+import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
   const { user, logOut } = useContext(AuthContext);
   // to do admin
   const isAdmin = true;
+  // const [isAdmin] = useAdmin();
   const isInstructors = false;
   const inStudents = true;
   const menuItem = (
     <div>
-      {isAdmin && 
-      <div>
+      {isAdmin && (
+        <div>
           <NavLink to="/dashboard/manageClasses">
             <li className="text-md ">Manage Classes</li>
           </NavLink>
           <NavLink to="/dashboard/manageUsers">
             <li className="text-md ">Manage Users</li>
           </NavLink>
-      </div>}
-      {isInstructors && 
+        </div>
+      )}
+      {isInstructors && (
         <>
-           <NavLink to="/dashboard/addClass">
+          <NavLink to="/dashboard/addClass">
             <li className="text-md "> Add Class </li>
           </NavLink>
-           <NavLink to="/dashboard/myClasses">
+          <NavLink to="/dashboard/myClasses">
             <li className="text-md ">My Classes </li>
           </NavLink>
-        </>}
+        </>
+      )}
       {inStudents && (
         <>
           <NavLink to="/dashboard/selectedClasses">
