@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import avatar from "../assets/avatar/placeholder.jpg";
 import { AuthContext } from "../Provider/AuthProvider";
@@ -9,28 +9,30 @@ import GenarelRoutes from "../Components/Dashboard-Routes/GenarelRoutes";
 import AdminRoutes from "../Components/Dashboard-Routes/AdminRoutes";
 import InstructorsRoute from "../Components/Dashboard-Routes/InstructorsRoute";
 import StudentsRoutes from "../Components/Dashboard-Routes/StudentsRoutes";
+import axios from "axios";
+import { useQuery } from "react-query";
+import { data } from "autoprefixer";
 
 const Dashboard = () => {
+  const [role, setRole] = useState("");
   const { user, logOut } = useContext(AuthContext);
-  // to do admin
-  const isAdmin = true;
-  // const [isAdmin] = useAdmin();
-  console.log(isAdmin);
-  const isInstructors = true;
-  const inStudents = true;
+
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/role/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => setRole(data.role));
+  }, []);
+
   const menuItem = (
     <div>
-      {isAdmin && (
+      {role === "admin" && (
         <div>
           <AdminRoutes></AdminRoutes>
         </div>
       )}
-      {isInstructors && (
-        <InstructorsRoute></InstructorsRoute>
-      )}
-      {inStudents && (
-        <StudentsRoutes></StudentsRoutes>
-      )}
+      {role === "instructor" && <InstructorsRoute></InstructorsRoute>}
+      {role || <StudentsRoutes></StudentsRoutes>}
     </div>
   );
   const handelLogOut = () => {

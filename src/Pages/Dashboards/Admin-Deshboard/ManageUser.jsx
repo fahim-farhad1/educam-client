@@ -31,6 +31,25 @@ const ManageUser = () => {
         }
     })
   }
+  const handelMakeInstructors = user =>{
+    fetch(`http://localhost:3000/students/instructor/${user.email}`,{
+        method: 'PATCH'
+    })
+    .then(res => res.json())
+    .then( data =>{
+        if(data.modifiedCount){
+            refetch();
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: `${user.name} is an Admin Now`,
+                showConfirmButton: false,
+                timer: 1500
+              })
+        }
+    })
+  }
+
   return (
     <DashboardContainer>
       <div className="overflow-x-auto">
@@ -71,7 +90,7 @@ const ManageUser = () => {
                   ) : 'Student'}
                  </th>
                   <th>
-                    <button className="ml-3 btn btn-ghost text-white bg-red-500 btn-sm">Make Instructor</button>
+                    <button onClick={() =>handelMakeInstructors(user)}  className={`${user.role === 'instructor' ? "ml-2 btn btn-sm btn-disabled" : "ml-2 btn btn-ghost text-white bg-red-500 btn-sm"}`}>Make Instructor</button>
                     <button onClick={() =>handelMakeAdmin(user)}  className={`${user.role === 'admin' ? "ml-2 btn btn-sm btn-disabled" : "ml-2 btn btn-ghost text-white bg-red-500 btn-sm"}`}>Make Admin</button>
                   </th>
                 </tr>

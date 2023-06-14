@@ -55,6 +55,7 @@ const SelectedClasses = () => {
             {addedClass.map((classes) => (
               <>
                 <tr>
+                  
                   <td>
                     <button
                       onClick={() => handelDelete(classes._id)}
