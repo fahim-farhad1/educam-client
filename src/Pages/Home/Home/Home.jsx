@@ -4,6 +4,7 @@ import PopularClasses from '../Popular-Classes/PopularClasses';
 import Container from '../../../Components/Shared/Container';
 import PopularInstructors from '../Popular-Instructors/PopularInstructors';
 import Footer from '../../../Components/Shared/Footer';
+import Reviews from '../Revews/Reviews';
 
 const Home = () => {
     return (
@@ -11,7 +12,8 @@ const Home = () => {
             <Container><Banner></Banner></Container>
             <PopularClasses></PopularClasses>
             <Container><PopularInstructors /></Container>
-            <h1 className='text-center text-7xl font-bold text-green-600'>To Do:------- add extra section</h1>
+            <Container><Reviews></Reviews></Container>
+           
         </div>
     );
 };

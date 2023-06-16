@@ -51,7 +51,7 @@ const AuthProvider = ({ children }) => {
       // get and set token
       if (createUser) {
         axios
-          .post("http://localhost:3000/jwt", { email: createUser.email })
+          .post("https://educam-server.vercel.app/jwt", { email: createUser.email })
           .then((data) => {
             console.log(data.data.token);
             localStorage.setItem("access-token", data.data.token);

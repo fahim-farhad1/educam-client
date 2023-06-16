@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { BiShow, BiHide } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
@@ -11,16 +12,28 @@ const Signup = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   const from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm();
   const { createUser, signInWithGoogle, userProfileUpdate, user } =
     useContext(AuthContext);
-    // const {displayName, email, photoURL} = user;
+  // const {displayName, email, photoURL} = user;
   const imgHosting = `https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`;
 
   const onSubmit = (data) => {
@@ -43,15 +56,19 @@ const Signup = () => {
             console.log(loggedUser);
             // update user
             userProfileUpdate(data.name, imageUrl)
-            .then(() => {
-                const savedUser = {name:loggedUser.displayName, image:loggedUser.photoURL, email:loggedUser.email,};
+              .then(() => {
+                const savedUser = {
+                  name: loggedUser.displayName,
+                  image: loggedUser.photoURL,
+                  email: loggedUser.email,
+                };
                 console.log(savedUser);
-                fetch("http://localhost:3000/students", {
+                fetch("https://educam-server.vercel.app/students", {
                   method: "POST",
                   headers: {
-                    'content-type': 'application/json'
+                    "content-type": "application/json",
                   },
-                  body: JSON.stringify(savedUser)
+                  body: JSON.stringify(savedUser),
                 })
                   .then((res) => res.json())
                   .then((data) => {
@@ -84,27 +101,6 @@ const Signup = () => {
           });
       });
   };
-
-  // const handelGoogleSignIn = () => {
-  //   signInWithGoogle()
-  //     .then((result) => {
-  //       const loggedUser = result.user;
-  //       // Login alert
-  //       Swal.fire({
-  //         position: "top-end",
-  //         icon: "success",
-  //         title: "Login Successfully!😃",
-  //         showConfirmButton: false,
-  //         timer: 1500,
-  //       });
-  //       navigate(from, { replace: true });
-  //       console.log(loggedUser);
-  //     })
-  //     .catch((error) => {
-  //       const message = error.message;
-  //       console.log(message);
-  //     });
-  // };
 
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -160,36 +156,79 @@ const Signup = () => {
                 </p>
               )}
             </div>
-            <div className="form-control">
+            <div className="form-control relative">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="password"
                 {...register("password", {
                   required: true,
                   minLength: 6,
                   maxLength: 20,
                   pattern:
-                    /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/,
+                  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/,
                 })}
                 aria-invalid={errors.password ? "true" : "false"}
                 className="input input-bordered"
               />
+              <button
+                type="button"
+                className="absolute right-8 mt-16 transform -translate-y-1/2"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? <BiShow /> : <BiHide />}
+              </button>
               {errors.password?.type === "required" && (
                 <p className="text-sm text-red-500 mt-2" role="alert">
-                  password is required
+                  Password is required
                 </p>
               )}
+
               {errors.password?.type === "minLength" && (
                 <p className="text-sm text-red-500 mt-2" role="alert">
-                  is less than 6 characters!
+                  Password is less than 6 characters
                 </p>
               )}
               {errors.password?.type === "pattern" && (
                 <p className="text-sm text-red-500 mt-2" role="alert">
-                  don't have a capital letter or a special character
+                  Password should have at least one capital letter and one
+                  special character
+                </p>
+              )}
+            </div>
+
+            <div className="form-control  relative">
+              <label className="label">
+                <span className="label-text">Confirm Password</span>
+              </label>
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="confirm password"
+                {...register("confirmPassword", {
+                  required: true,
+                  validate: (value) =>
+                    value === watch("password") || "Passwords do not match",
+                })}
+                aria-invalid={errors.confirmPassword ? "true" : "false"}
+                className="input input-bordered"
+              />
+              <button
+                type="button"
+                className="absolute right-8 mt-16 transform -translate-y-1/2"
+                onClick={toggleConfirmPasswordVisibility}
+              >
+                {showConfirmPassword ? <BiShow /> : <BiHide />}
+              </button>
+              {errors.confirmPassword?.type === "required" && (
+                <p className="text-sm text-red-500 mt-2" role="alert">
+                  Confirm Password is required
+                </p>
+              )}
+              {errors.confirmPassword?.type === "validate" && (
+                <p className="text-sm text-red-500 mt-2" role="alert">
+                  {errors.confirmPassword.message}
                 </p>
               )}
             </div>

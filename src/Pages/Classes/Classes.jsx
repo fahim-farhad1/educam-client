@@ -6,17 +6,25 @@ import Swal from "sweetalert2";
 
 const Classes = () => {
   const [Classes, setClasses] = useState([]);
+  const [role, setRole] = useState(['']);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    fetch("http://localhost:3000/classes")
+    fetch("https://educam-server.vercel.app/classes")
       .then((res) => res.json())
       .then((data) => setClasses(data));
   }, []);
   console.log(Classes);
 
+  useEffect(() => {
+    fetch(`https://educam-server.vercel.app/role/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => setRole(data.role));
+  }, []);
+
+  console.log(role);
   const handelSelect = (classes) => {
     const { _id, course_name, course_image, course_instructor, course_price } =
       classes;
@@ -29,7 +37,7 @@ const Classes = () => {
         course_instructor,
         email: user.email,
       };
-      fetch('http://localhost:3000/addtoclass', {
+      fetch('https://educam-server.vercel.app/addtoclass', {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -43,7 +51,7 @@ const Classes = () => {
             Swal.fire({
               position: "top-end",
               icon: "success",
-              title: "Course added om your Dashboard😍",
+              title: "Course added on your Dashboard😍",
               showConfirmButton: false,
               timer: 1500,
             });
@@ -93,9 +101,10 @@ const Classes = () => {
                     <span>Price: </span>${classes.course_price}
                   </p>
                   <div className="card-actions justify-end">
+                    <button></button>
                     <button
                       onClick={() => handelSelect(classes)}
-                      className="btn btn-sm bg-blue-400 w-full hover:bg-blue-700"
+                      className={`${classes.available_seats !== 0 && role !== 'admin'  && 'instructor'  ? "btn btn-sm bg-blue-400 w-full hover:bg-blue-700" : "btn btn-sm w-full btn-disabled"}`}
                     >
                       Select
                     </button>

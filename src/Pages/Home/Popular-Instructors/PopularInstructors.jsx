@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 const PopularInstructors = () => {
   const [instructors, setInstructors] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3000/instructors")
+    fetch("https://educam-server.vercel.app/instructors")
       .then((res) => res.json())
       .then((data) => setInstructors(data.slice(0, 6)));
   }, []);
@@ -23,6 +23,7 @@ const PopularInstructors = () => {
               </figure>
               <div className="card-body">
                 <h2 className="card-title">{instructor.instructor_name}</h2>
+                <p className="text-orange-400">Courses:</p>
                 <p>
                   {instructor.instructor_courses.map((course, index) => (
                     <ol>

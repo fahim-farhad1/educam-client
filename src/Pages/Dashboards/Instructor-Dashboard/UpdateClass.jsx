@@ -1,14 +1,11 @@
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import useInstructorAddClass from "../../../Hooks/useInstructorAddClass";
+import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const AddClasses = () => {
-  const [addclass] = useInstructorAddClass();
-  const [name, setName] = useState(addclass?.[0]?.name );
-  const [email, setEmail] = useState(addclass?.[0]?.email);
+const UpdateClass = () => {
+  const clsses = useLoaderData();
+  console.log(clsses._id)
 
-console.log(name, email);
   const {
     register,
     reset,
@@ -20,52 +17,70 @@ console.log(name, email);
     const {
       course_image,
       course_name,
-      name: course_instructor,
+      course_instructor,
       course_description,
       course_price,
       available_seats,
-      email: instructor_email,
+      instructor_email,
     } = data;
-    const courseData = {
+    const updateClass = {
       course_image,
       course_name,
       course_instructor,
-      instructor_email,
       course_description,
       course_price: parseFloat(course_price),
       available_seats: parseInt(available_seats),
-      status: "pending",
+      instructor_email,
     };
-    fetch("https://educam-server.vercel.app/uploadclass", {
-      method: "POST",
+    fetch(`https://educam-server.vercel.app/classess/${clsses._id}`, {
+      method: "PUT",
       headers: {
-        "content-type": "application/json",
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(courseData),
+      body: JSON.stringify(updateClass),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.insertedId) {
-          reset();
-          // alert
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Course added om your Dashboard😍",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.modifiedCount > 0) {
+            reset()
+            // alert
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Class Update Successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        console.log("Data updated successfully:", result);
+        // Handle any UI updates or display a success message to the user
+      })
+      .catch((error) => {
+        console.error("Error updating data:", error);
+        // Handle any error and display an error message to the user
       });
-
-    // Add your logic to save the class to the database
-    // Set the 'status' field to 'pending' in the database
-    console.log(data.course_instructor.value);
+    console.log(data);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-20 my-10">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full mx-56 my-10">
       <div className="card shadow-md p-5 mx-auto">
+        <img className="h-96" src={clsses.course_image} alt="" />
+        <div className="mb-4">
+          <label htmlFor="image" className="block text-gray-700 font-bold mb-2">
+            Class Image
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            // {...register("course_image", { required: "image is required" })}
+          />
+          {errors.image && (
+            <p className="text-sm text-red-500 mt-2" role="alert">
+              {errors.image?.message}
+            </p>
+          )}
+        </div>
         <div className="mb-4">
           <label
             htmlFor="className"
@@ -77,23 +92,10 @@ console.log(name, email);
             id="name"
             type="text"
             className="w-full p-2 border rounded-md"
-            {...register("course_name", { required: true })}
+            // placeholder=
+            placeholder={clsses.course_name}
+            // {...register("course_name", { required: true })}
           />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="image" className="block text-gray-700 font-bold mb-2">
-            Class Image
-          </label>
-          <input
-            type="file"
-            accept="image/*"
-            {...register("course_image", { required: "image is required" })}
-          />
-          {errors.image && (
-            <p className="text-sm text-red-500 mt-2" role="alert">
-              {errors.image?.message}
-            </p>
-          )}
         </div>
         <div className="mb-4">
           <label
@@ -106,8 +108,8 @@ console.log(name, email);
             id="instructorName"
             type="text"
             className="w-full p-2 border rounded-md"
-            {...register("course_instructor", { required: true })}
-            defaultValue={name}
+            // {...register("course_instructor", { required: true })}
+            value={clsses.course_instructor}
             readOnly
           />
         </div>
@@ -122,8 +124,8 @@ console.log(name, email);
             id="instructorEmail"
             type="email"
             className="w-full p-2 border rounded-md"
-            {...register("instructor_email", { required: true })}
-            defaultValue={email}
+            // {...register("instructor_email", { required: true })}
+            value={clsses.instructor_email}
             readOnly
           />
         </div>
@@ -138,7 +140,8 @@ console.log(name, email);
             id="courseDescription"
             type="text"
             className="w-full p-2 border rounded-md"
-            {...register("course_description", { required: true })}
+            placeholder={clsses.course_description}
+            // {...register("course_description", { required: true })}
           />
         </div>
         <div className="mb-4">
@@ -152,7 +155,8 @@ console.log(name, email);
             id="availableSeats"
             type="number"
             className="w-full p-2 border rounded-md"
-            {...register("available_seats", { required: true })}
+            placeholder={clsses.available_seats}
+            // {...register("available_seats", { required: true })}
           />
         </div>
         <div className="mb-4">
@@ -163,18 +167,19 @@ console.log(name, email);
             id="price"
             type="number"
             className="w-full p-2 border rounded-md"
-            {...register("course_price", { required: true })}
+            placeholder={clsses.course_price}
+            // {...register("course_price", { required: true })}
           />
         </div>
         <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
-          Submit
+          Update
         </button>
       </div>
     </form>
   );
 };
 
-export default AddClasses;
+export default UpdateClass;

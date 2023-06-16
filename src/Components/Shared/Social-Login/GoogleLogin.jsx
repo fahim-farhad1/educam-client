@@ -17,7 +17,7 @@ const GoogleLogin = () => {
           image: loggedUser.photoURL,
           email: loggedUser.email,
         };
-        fetch("http://localhost:3000/students", {
+        fetch("https://educam-server.vercel.app//students", {
           method: "POST",
           headers: {
             "content-type": "application/json",

@@ -5,7 +5,7 @@ import Container from "../../../Components/Shared/Container";
 const PopularClasses = () => {
   const [popularClasses, setPopularClasses] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3000/popular")
+    fetch("https://educam-server.vercel.app/popular")
       .then((res) => res.json())
       .then((data) => setPopularClasses(data.slice(0, 6)));
   }, []);

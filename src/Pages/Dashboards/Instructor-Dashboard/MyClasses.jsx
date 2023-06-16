@@ -1,6 +1,7 @@
 import React from "react";
 import DashboardContainer from "../../../Components/Shared/DashboardContainer";
 import useInstructorClass from "../../../Hooks/useInstructorClass";
+import { Link } from "react-router-dom";
 
 const MyClasses = () => {
   const [instructorClass, refetch] = useInstructorClass();
@@ -12,31 +13,26 @@ const MyClasses = () => {
           {/* head */}
           <thead>
             <tr>
-              <th></th>
-              <th className="text-center">Name</th>
-              <th className="text-center">Price</th>
+              <th>Status</th>
+              <th>
+                <th></th>
+              </th>
               <th className="text-center">Student's</th>
-              <th className="text-center">Available Seats</th>
-              <th className="text-center">Status</th>
+              <th></th>
+              <th className="text-center">Admin Feedback</th>
+              <th className="text-center">Action</th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
             {instructorClass.map((classes) => (
-                // course_image,
-                // course_name,
-                // course_instructor,
-                // instructor_email,
-                // course_description,
-                // course_price: parseFloat(course_price),
-                // available_seats: parseInt(available_seats),
-                // status: "pending"
-
               <>
-                <tr>
+                <tr >
                   <th>
-                    <label></label>
+                    <div className={`${classes.status === 'pending' && 'denied' ? "badge badge-outline bg-red-500 text-white p-3" : "badge badge-outline bg-blue-500 text-white p-3" }`}>{classes.status}</div>
+                    {/* <div className="badge badge-outline bg-red-500 text-white">p{classes.status}</div> */}
                   </th>
+
                   <td>
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
@@ -52,14 +48,18 @@ const MyClasses = () => {
                       </div>
                     </div>
                   </td>
-                  <td>
-                    <p>${classes.course_price}</p>
+                  <td className="text-center">
+                    {classes.enrolled_Students ? classes.enrolled_Students : 0}
                   </td>
-                  <td className="text-center">{classes.enrolled_Students ? classes.enrolled_Students : 0}</td>
-                  <td className="text-center">{classes.available_seats}</td>
-                  <td><p className="text-red-500">{classes.status}</p></td>
+                  <td></td>
+
+                  <td >
+                 <p >{classes.feedback}</p>
+                  </td>
                   <th>
-                    <button className="btn  btn-xs">Update</button>
+                    <Link to={`/dashboard/updateclass/${classes._id}`}>
+                      <button className="btn  btn-xs">Update</button>
+                    </Link>
                   </th>
                 </tr>
               </>

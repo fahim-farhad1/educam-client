@@ -14,11 +14,14 @@ import ManageUser from "../Pages/Dashboards/Admin-Deshboard/ManageUser";
 import ManageClass from "../Pages/Dashboards/Admin-Deshboard/ManageClass";
 import AddClasses from "../Pages/Dashboards/Instructor-Dashboard/AddClasses";
 import MyClasses from "../Pages/Dashboards/Instructor-Dashboard/MyClasses";
+import Error from "../Components/Error/Error";
+import UpdateClass from "../Pages/Dashboards/Instructor-Dashboard/UpdateClass";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
@@ -39,12 +42,15 @@ export const router = createBrowserRouter([
       {
         path: "signup",
         element: <Signup></Signup>,
+        // element: <PasswordForm></PasswordForm>
+
       },
     ],
   },
   {
     path: "dashboard",
     element: <PrivateRoute><Dashboard /></PrivateRoute>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "selectedClasses",
@@ -73,6 +79,12 @@ export const router = createBrowserRouter([
       {
         path: 'myclasses',
         element: <MyClasses></MyClasses>
+      },
+      {
+        path: 'updateclass/:id',
+        element: <UpdateClass></UpdateClass>,
+        loader: ({params}) => fetch(`https://educam-server.vercel.app/classes/${params.id}`)
+        
       }
     ]
   },

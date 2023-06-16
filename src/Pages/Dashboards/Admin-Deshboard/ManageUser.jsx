@@ -14,7 +14,7 @@ const ManageUser = () => {
 
 
   const handelMakeAdmin = user =>{
-    fetch(`http://localhost:3000/students/admin/${user.email}`,{
+    fetch(`https://educam-server.vercel.app/students/admin/${user.email}`,{
         method: 'PATCH'
     })
     .then(res => res.json())
@@ -32,7 +32,7 @@ const ManageUser = () => {
     })
   }
   const handelMakeInstructors = user =>{
-    fetch(`http://localhost:3000/students/instructor/${user.email}`,{
+    fetch(`https://educam-server.vercel.app/students/instructor/${user.email}`,{
         method: 'PATCH'
     })
     .then(res => res.json())
@@ -42,7 +42,7 @@ const ManageUser = () => {
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: `${user.name} is an Admin Now`,
+                title: `${user.name} is Instructor Now`,
                 showConfirmButton: false,
                 timer: 1500
               })

@@ -4,22 +4,17 @@ import avatar from "../assets/avatar/placeholder.jpg";
 import { AuthContext } from "../Provider/AuthProvider";
 import { NavLink, Outlet } from "react-router-dom";
 import logo from "../assets/Logo/logo.png";
-import useAdmin from "../Hooks/useAdmin";
 import GenarelRoutes from "../Components/Dashboard-Routes/GenarelRoutes";
 import AdminRoutes from "../Components/Dashboard-Routes/AdminRoutes";
 import InstructorsRoute from "../Components/Dashboard-Routes/InstructorsRoute";
 import StudentsRoutes from "../Components/Dashboard-Routes/StudentsRoutes";
-import axios from "axios";
-import { useQuery } from "react-query";
-import { data } from "autoprefixer";
-
 const Dashboard = () => {
   const [role, setRole] = useState("");
   const { user, logOut } = useContext(AuthContext);
 
 
   useEffect(() => {
-    fetch(`http://localhost:3000/role/${user?.email}`)
+    fetch(`https://educam-server.vercel.app/role/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setRole(data.role));
   }, []);
@@ -130,6 +125,7 @@ const Dashboard = () => {
             {menuItem}
             <GenarelRoutes></GenarelRoutes>
           </ul>
+          
           <Outlet></Outlet>
         </div>
         {/* Page content here */}

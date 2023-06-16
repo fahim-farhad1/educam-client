@@ -4,7 +4,7 @@ import Container from "../../Components/Shared/Container";
 const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3000/instructors")
+    fetch("https://educam-server.vercel.app/instructors")
       .then((res) => res.json())
       .then((data) => setInstructors(data));
   }, []);
@@ -14,7 +14,7 @@ const Instructors = () => {
       <div className="py-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {instructors.map((instructor) => (
-            <>
+            <div key={instructor._id}>
               <div className="card w-full bg-base-100 shadow-xl">
                 <figure>
                   <img src={instructor.instructor_image} />
@@ -32,7 +32,7 @@ const Instructors = () => {
                 </p>
                 </div>
               </div>
-            </>
+            </div>
           ))}
         </div>
       </div>
