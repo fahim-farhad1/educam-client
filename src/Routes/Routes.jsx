@@ -16,6 +16,7 @@ import AddClasses from "../Pages/Dashboards/Instructor-Dashboard/AddClasses";
 import MyClasses from "../Pages/Dashboards/Instructor-Dashboard/MyClasses";
 import Error from "../Components/Error/Error";
 import UpdateClass from "../Pages/Dashboards/Instructor-Dashboard/UpdateClass";
+import AdminFeedback from "../Pages/Dashboards/Admin-Deshboard/AdminFeedback";
 
 export const router = createBrowserRouter([
   {
@@ -83,6 +84,12 @@ export const router = createBrowserRouter([
       {
         path: 'updateclass/:id',
         element: <UpdateClass></UpdateClass>,
+        loader: ({params}) => fetch(`https://educam-server.vercel.app/classes/${params.id}`)
+        
+      },
+      {
+        path: 'feedback/:id',
+        element: <AdminFeedback></AdminFeedback>,
         loader: ({params}) => fetch(`https://educam-server.vercel.app/classes/${params.id}`)
         
       }
