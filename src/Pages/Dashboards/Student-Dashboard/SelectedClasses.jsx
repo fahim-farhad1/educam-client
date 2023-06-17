@@ -8,7 +8,10 @@ import { Link } from "react-router-dom";
 const SelectedClasses = () => {
   const [addedClass, refetch] = useAddedClass();
   console.log(addedClass);
-    const total = addedClass.reduce((sum, classes) => classes.course_price + sum, 0)
+  const total = addedClass.reduce(
+    (sum, classes) => classes.course_price + sum,
+    0
+  );
   const handelDelete = (_id) => {
     console.log(_id);
     Swal.fire({
@@ -53,45 +56,54 @@ const SelectedClasses = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {addedClass.map((classes) => (
-              <>
-                <tr>
-                  
-                  <td>
-                    <button
-                      onClick={() => handelDelete(classes._id)}
-                      className="btn btn-ghost"
-                    >
-                      <TiDeleteOutline className="h-8 w-8">
-                        <TiDeleteOutline />
-                      </TiDeleteOutline>
-                    </button>
-                  </td>
-                  <td>
-                    <div className="flex items-center space-x-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                          <img src={classes.course_image} alt="Class Img" />
+            {addedClass.length > 0 ? (
+              `${addedClass.map((classes) => (
+                <>
+                  <tr>
+                    <td>
+                      <button
+                        onClick={() => handelDelete(classes._id)}
+                        className="btn btn-ghost"
+                      >
+                        <TiDeleteOutline className="h-8 w-8">
+                          <TiDeleteOutline />
+                        </TiDeleteOutline>
+                      </button>
+                    </td>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle w-12 h-12">
+                            <img src={classes.course_image} alt="Class Img" />
+                          </div>
+                        </div>
+                        <div className="font-bold">
+                          {classes.course_instructor}
                         </div>
                       </div>
-                      <div className="font-bold">
-                        {classes.course_instructor}
-                      </div>
-                    </div>
-                  </td>
-                  <td>{classes.course_name}</td>
-                  <td>${classes.course_price}</td>
-                </tr>
-              </>
-            ))}
+                    </td>
+                    <td>{classes.course_name}</td>
+                    <td>${classes.course_price}</td>
+                  </tr>
+                </>
+              ))}`
+            ) : (
+              <p className="text-center text-orange-500 text-3xl mt-20">
+                No Class added
+              </p>
+            )}
           </tbody>
         </table>
         <div className=" w-72 bg-base-200 rounded-md">
           <h1 className="text-center mt-5">Payment Summery</h1>
           <div className="divider -mt-1"></div>
           <div className="ml-3">
-            <p>Courses : <span>{addedClass.length}</span></p>
-            <p>Amount: <span>${total}</span></p>
+            <p>
+              Courses : <span>{addedClass.length}</span>
+            </p>
+            <p>
+              Amount: <span>${total}</span>
+            </p>
             <p>Tex : $0</p>
             <p>Discount: $0</p>
           </div>
@@ -100,7 +112,15 @@ const SelectedClasses = () => {
             Total: <span className="text-red-500">${total}</span>
           </p>
           <div className="p-3">
-            <button className="btn btn-success w-full"><Link to='/dashboard/payment'>Pay Now</Link>  </button>
+            <button
+              className={`${
+                addedClass.length > 0
+                  ? "btn btn-success w-full"
+                  : "btn btn-disabled w-full"
+              }`}
+            >
+              <Link to="/dashboard/payment">Pay Now</Link>{" "}
+            </button>
           </div>
         </div>
       </div>

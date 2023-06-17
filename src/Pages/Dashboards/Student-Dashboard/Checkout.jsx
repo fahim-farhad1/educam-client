@@ -1,7 +1,7 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
-import './Checkout.css'
+import "./Checkout.css";
 
 const Checkout = ({ course_price, classes }) => {
   const stripe = useStripe();
@@ -14,16 +14,17 @@ const Checkout = ({ course_price, classes }) => {
   console.log(classes);
 
   useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
     console.log(course_price);
-    fetch("https://educam-server.vercel.app/create-payment-intent", {
-      // fetch("http://localhost:3000/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ course_price }),
-    })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
+    if (course_price > 0) {
+      fetch("https://educam-server.vercel.app/create-payment-intent", {
+        // fetch("http://localhost:3000/create-payment-intent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ course_price }),
+      })
+        .then((res) => res.json())
+        .then((data) => setClientSecret(data.clientSecret));
+    }
   }, [course_price]);
   console.log("clientSecret", clientSecret);
 
@@ -80,9 +81,10 @@ const Checkout = ({ course_price, classes }) => {
         email: user?.email,
         transactionId,
         course_price,
-        date: new date(),
+        // date: new date(),
         Quantity: classes.length,
-        classes: classes.map((classes) => classes._id),
+        classesId: classes.map((classes) => classes._id),
+        classID: classes.map((classes) => classes.classId),
       };
       console.log(payment);
 
@@ -95,7 +97,7 @@ const Checkout = ({ course_price, classes }) => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-          if (data.insertedId) {
+          if (data.result.insertedId) {
           }
         });
     }
