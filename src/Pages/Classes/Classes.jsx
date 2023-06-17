@@ -10,6 +10,7 @@ const Classes = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  // const total =  (Classes.available_seats) - (Classes.enrolled_students);
 
   useEffect(() => {
     fetch("https://educam-server.vercel.app/classes")

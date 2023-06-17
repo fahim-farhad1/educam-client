@@ -3,6 +3,7 @@ import useAddedClass from "../../../Hooks/useAddedClass";
 import DashboardContainer from "../../../Components/Shared/DashboardContainer";
 import { TiDeleteOutline } from "react-icons/ti";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const SelectedClasses = () => {
   const [addedClass, refetch] = useAddedClass();
@@ -99,7 +100,7 @@ const SelectedClasses = () => {
             Total: <span className="text-red-500">${total}</span>
           </p>
           <div className="p-3">
-            <button className="btn btn-success w-full">Pay Now </button>
+            <button className="btn btn-success w-full"><Link to='/dashboard/payment'>Pay Now</Link>  </button>
           </div>
         </div>
       </div>

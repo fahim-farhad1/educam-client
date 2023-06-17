@@ -18,7 +18,7 @@ const AdminFeedback = () => {
 
     console.log(data.feedback);
     const feedback = data.feedback
-    fetch(`http://localhost:3000/adminfeedback/${recived._id}`, {
+    fetch(`https://educam-server.vercel.app/adminfeedback/${recived._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

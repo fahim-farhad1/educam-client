@@ -17,6 +17,7 @@ import MyClasses from "../Pages/Dashboards/Instructor-Dashboard/MyClasses";
 import Error from "../Components/Error/Error";
 import UpdateClass from "../Pages/Dashboards/Instructor-Dashboard/UpdateClass";
 import AdminFeedback from "../Pages/Dashboards/Admin-Deshboard/AdminFeedback";
+import Payment from "../Pages/Dashboards/Student-Dashboard/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -92,6 +93,10 @@ export const router = createBrowserRouter([
         element: <AdminFeedback></AdminFeedback>,
         loader: ({params}) => fetch(`https://educam-server.vercel.app/classes/${params.id}`)
         
+      },
+      {
+        path: 'payment',
+        element: <Payment></Payment>
       }
     ]
   },

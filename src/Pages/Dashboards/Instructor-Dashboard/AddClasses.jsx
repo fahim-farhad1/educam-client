@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import useInstructorAddClass from "../../../Hooks/useInstructorAddClass";
 import Swal from "sweetalert2";
 
 const AddClasses = () => {
   const [addclass] = useInstructorAddClass();
-  const [name, setName] = useState(addclass?.[0]?.name );
-  const [email, setEmail] = useState(addclass?.[0]?.email);
 
-console.log(name, email);
+// console.log(name, email);
   const {
     register,
     reset,
@@ -57,10 +55,7 @@ console.log(name, email);
           });
         }
       });
-
-    // Add your logic to save the class to the database
-    // Set the 'status' field to 'pending' in the database
-    console.log(data.course_instructor.value);
+    console.log(data);
   };
 
   return (
@@ -107,7 +102,7 @@ console.log(name, email);
             type="text"
             className="w-full p-2 border rounded-md"
             {...register("course_instructor", { required: true })}
-            defaultValue={name}
+            defaultValue={addclass?.[0]?.name }
             readOnly
           />
         </div>
@@ -123,7 +118,7 @@ console.log(name, email);
             type="email"
             className="w-full p-2 border rounded-md"
             {...register("instructor_email", { required: true })}
-            defaultValue={email}
+            defaultValue={addclass?.[0]?.email}
             readOnly
           />
         </div>

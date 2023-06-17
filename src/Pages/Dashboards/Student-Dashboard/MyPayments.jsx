@@ -5,7 +5,7 @@ const MyPayments = () => {
   return (
     <DashboardContainer>
       <div>
-        <p>Its my payments page!</p>
+        <p className="text-blue-500 py-10 text-3xl text-center">Payments Page</p>
       </div>
     </DashboardContainer>
   );

@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const UpdateClass = () => {
   const clsses = useLoaderData();
+  const navigate = useNavigate();
   console.log(clsses._id)
 
   const {
-    register,
     reset,
     handleSubmit,
     formState: { errors },
@@ -28,8 +28,8 @@ const UpdateClass = () => {
       course_name,
       course_instructor,
       course_description,
-      course_price: parseFloat(course_price),
-      available_seats: parseInt(available_seats),
+      course_price,
+      available_seats,
       instructor_email,
     };
     fetch(`https://educam-server.vercel.app/classess/${clsses._id}`, {
@@ -43,6 +43,7 @@ const UpdateClass = () => {
       .then((result) => {
         if (result.modifiedCount > 0) {
             reset()
+            navigate('/dashboard/myclasses')
             // alert
             Swal.fire({
               position: "top-end",
