@@ -24,6 +24,7 @@ const Classes = () => {
       .then((res) => res.json())
       .then((data) => setRole(data.role));
   }, []);
+  console.log(setRole);
 
   console.log(role);
   const handelSelect = (classes) => {

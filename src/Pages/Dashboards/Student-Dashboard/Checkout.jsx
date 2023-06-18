@@ -2,9 +2,13 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import "./Checkout.css";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-const Checkout = ({ course_price, classes }) => {
+const Checkout = ({ classes }) => {
+  const {course_price} = classes;
   const stripe = useStripe();
+  const Navigate = useNavigate()
   const elements = useElements();
   const { user } = useAuth();
   const [cardError, setcardError] = useState(" ");
@@ -17,7 +21,7 @@ const Checkout = ({ course_price, classes }) => {
     console.log(course_price);
     if (course_price > 0) {
       fetch("https://educam-server.vercel.app/create-payment-intent", {
-        // fetch("http://localhost:3000/create-payment-intent", {
+        // fetch("https://educam-server.vercel.app/create-payment-intent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ course_price }),
@@ -81,15 +85,25 @@ const Checkout = ({ course_price, classes }) => {
         email: user?.email,
         transactionId,
         course_price,
-        // date: new date(),
-        Quantity: classes.length,
-        classesId: classes.map((classes) => classes._id),
-        classID: classes.map((classes) => classes.classId),
+        date: new Date().toLocaleString("en-US", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          hour12: true,
+        }),
+        classesId: classes._id,
+        classImage: classes.course_image,
+        className: classes.course_name,
+        classInstructor: classes.course_instructor,
+        classPrice:  classes.course_price,
+        classID: classes.classId,
       };
       console.log(payment);
 
       // fetch("https://educam-server.vercel.app/payments", {
-      fetch("http://localhost:3000/payments", {
+      fetch("https://educam-server.vercel.app/payments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payment),
@@ -97,7 +111,16 @@ const Checkout = ({ course_price, classes }) => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-          if (data.result.insertedId) {
+          if (data.insertResult.insertedId) {
+            // payment success alert
+            Navigate('/dashboard/mypayments')
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Login Successfully!😃',
+              showConfirmButton: false,
+              timer: 1500
+            })
           }
         });
     }

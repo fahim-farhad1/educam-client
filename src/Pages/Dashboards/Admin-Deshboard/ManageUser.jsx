@@ -85,13 +85,13 @@ const ManageUser = () => {
                     </div>
                   </td>
                  <th>
-                 {user.role === "admin" ? (
-                    "Admin"
+                 {user.role === "admin" || user.role === "instructor" ? (
+                    user.role
                   ) : 'Student'}
                  </th>
                   <th>
-                    <button onClick={() =>handelMakeInstructors(user)}  className={`${user.role === 'instructor' ? "ml-2 btn btn-sm btn-disabled" : "ml-2 btn btn-ghost text-white bg-red-500 btn-sm"}`}>Make Instructor</button>
-                    <button onClick={() =>handelMakeAdmin(user)}  className={`${user.role === 'admin' ? "ml-2 btn btn-sm btn-disabled" : "ml-2 btn btn-ghost text-white bg-red-500 btn-sm"}`}>Make Admin</button>
+                    <button onClick={() =>handelMakeInstructors(user)}  className={`${user.role === 'instructor' ? "ml-2 btn btn-sm btn-disabled" : " mb-1 btn btn-ghost text-white bg-red-500 btn-sm hover:bg-red-800"}`}>Make Instructor</button>
+                    <button onClick={() =>handelMakeAdmin(user)}  className={`${user.role === 'admin' ? "ml-2 btn btn-sm btn-disabled" : "mt-2 btn btn-ghost text-white bg-red-500 btn-sm  hover:bg-red-800"}`}>Make Admin</button>
                   </th>
                 </tr>
               </>

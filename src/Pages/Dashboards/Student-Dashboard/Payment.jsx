@@ -7,24 +7,20 @@ import useAddedClass from "../../../Hooks/useAddedClass";
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PK);
 
 const Payment = () => {
-    const [addedClass] = useAddedClass()
-    const total = addedClass.reduce((sum, classes) => classes.course_price + sum, 0)
-    const course_price = parseFloat(total.toFixed(2));
-    console.log(addedClass);
+  const [addedClass] = useAddedClass();
+  // const classes = addedClass.map((classItem) => classItem);
+  // console.log(classes);
+  // const course_prices = classes.map((classItem) => classItem[0].course_price);
+  // console.log(course_prices);
   return (
-
-      <div className="mx-auto text-center space-y-5">
-        <p className="text-blue-500 py-10 text-3xl text-center">
-          Payments Page
-        </p>
-        <Elements stripe={stripePromise}>
-          <Checkout
-          course_price = {course_price}
-          classes = {addedClass}
-          ></Checkout>
-        </Elements>
-      </div>
-
+    <div className="mx-auto text-center space-y-5">
+      <p className="text-blue-500 py-10 text-3xl text-center">Payments Page</p>
+      <Elements stripe={stripePromise}>
+        {
+          addedClass.map(classes =>  <Checkout classes={classes}></Checkout>)
+        }
+      </Elements>
+    </div>
   );
 };
 

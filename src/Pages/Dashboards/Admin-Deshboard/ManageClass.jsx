@@ -3,6 +3,7 @@ import DashboardContainer from "../../../Components/Shared/DashboardContainer";
 import Swal from "sweetalert2";
 import useAdminAction from "../../../Hooks/useAdminAction";
 import { Link } from "react-router-dom";
+import './Customcss.css'
 
 const ManageClass = () => {
   const [adminActions, refetch] = useAdminAction();
@@ -68,9 +69,8 @@ const ManageClass = () => {
   };
 
   return (
-    <DashboardContainer>
-      <div className="max-w-[1280px]">
-        <table className="table">
+      <div >
+        <table className="table ">
           {/* head */}
           <thead>
             <tr className="text-center">
@@ -156,7 +156,6 @@ const ManageClass = () => {
           </tbody>
         </table>
       </div>
-    </DashboardContainer>
   );
 };
 
