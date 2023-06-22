@@ -18,19 +18,19 @@ const PopularInstructors = () => {
             <div className="card w-full bg-base-100 shadow-xl">
               <figure>
                 <img
-                  src={instructor.instructor_image}
+                  src={instructor.image}
                 />
               </figure>
               <div className="card-body">
-                <h2 className="card-title">{instructor.instructor_name}</h2>
-                <p className="text-orange-400">Courses:</p>
-                <p>
+                <h2 className="card-title">{instructor.name}</h2>
+                <p className="text-orange-400">email: {instructor.email}</p>
+                {/* <p>
                   {instructor.instructor_courses.map((course, index) => (
                     <ol>
                       <li>{index +1 }. {course}</li>
                     </ol>
                   ))}
-                </p>
+                </p> */}
               </div>
             </div>
           </>

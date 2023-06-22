@@ -6,9 +6,9 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 const Checkout = ({ classes }) => {
-  const {course_price} = classes;
+  const { course_price } = classes;
   const stripe = useStripe();
-  const Navigate = useNavigate()
+  const Navigate = useNavigate();
   const elements = useElements();
   const { user } = useAuth();
   const [cardError, setcardError] = useState(" ");
@@ -81,6 +81,28 @@ const Checkout = ({ classes }) => {
       const transactionId = paymentIntent.id;
 
       // save payments info
+      const updateClass ={
+        available_seats: parseInt(classes.available_seats) -1 ,
+        enrolled_students: parseInt(classes.enrolled_students)+ 1 ,
+      }
+      fetch( `https://educam-server.vercel.app/updateclassfield/${ classes._id}`,{
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updateClass),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          // if (data.modifiedCount > 0) {
+          //   Swal.fire({
+          //     position: "top-end",
+          //     icon: "success",
+          //     title: "update class",
+          //     showConfirmButton: false,
+          //     timer: 1500,
+          //   });
+          // }
+        })
       const payment = {
         email: user?.email,
         transactionId,
@@ -97,7 +119,7 @@ const Checkout = ({ classes }) => {
         classImage: classes.course_image,
         className: classes.course_name,
         classInstructor: classes.course_instructor,
-        classPrice:  classes.course_price,
+        classPrice: classes.course_price,
         classID: classes.classId,
       };
       console.log(payment);
@@ -112,15 +134,16 @@ const Checkout = ({ classes }) => {
         .then((data) => {
           console.log(data);
           if (data.insertResult.insertedId) {
-            // payment success alert
-            Navigate('/dashboard/mypayments')
             Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'Login Successfully!😃',
+              position: "top-end",
+              icon: "success",
+              title: "Payments Successfull",
               showConfirmButton: false,
-              timer: 1500
-            })
+              timer: 1500,
+            });
+
+            // payment success alert
+            Navigate("/dashboard/mypayments");
           }
         });
     }

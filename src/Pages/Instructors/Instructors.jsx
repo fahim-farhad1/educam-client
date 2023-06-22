@@ -17,19 +17,12 @@ const Instructors = () => {
             <div key={instructor._id}>
               <div className="card w-full bg-base-100 shadow-xl">
                 <figure>
-                  <img src={instructor.instructor_image} />
+                  <img src={instructor.image} />
                 </figure>
                 <div className="card-body">
-                  <h2 className="card-title">{instructor.instructor_name}</h2>
-                  <p>{instructor.instructor_email}</p>
-                <p className="font-bold text-orange-400">Courses:</p>
-                <p>
-                  {instructor.instructor_courses.map((course, index) => (
-                    <ol>
-                      <li>{index +1 }. {course}</li>
-                    </ol>
-                  ))}
-                </p>
+                  <h2 className="card-title">{instructor.name}</h2>
+                  <p><span className="text-red-400">email:</span> {instructor.email}</p>
+                
                 </div>
               </div>
             </div>
